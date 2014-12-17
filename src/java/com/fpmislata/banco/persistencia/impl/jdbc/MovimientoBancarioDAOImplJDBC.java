@@ -26,7 +26,7 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         Connection connection = connectionFactory.getConnection();
         
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MovimientoBancario WHERE idMovimientoBancario = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM movimientobancario WHERE idMovimientoBancario = ?");
             preparedStatement.setInt(1, id);
             
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -48,7 +48,7 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         Connection connection = connectionFactory.getConnection();
         
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO MovimientoBancario VALUES (null, ?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO movimientobancario VALUES (null, ?,?,?,?)");
             
             preparedStatement.setInt(1, t.getCuentaOrigen());
             preparedStatement.setInt(2, t.getCuentaDestino());
@@ -70,7 +70,7 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         Connection connection = connectionFactory.getConnection();
         
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE MovimientoBancario SET CuentaOrigen= ?, CuentaDestino=?, Cantidad=?, Motivo=? WHERE idMovimientoBancario=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE movimientonancario SET CuentaOrigen= ?, CuentaDestino=?, Cantidad=?, Motivo=? WHERE idMovimientoBancario=?");
             
             preparedStatement.setInt(1, t.getCuentaOrigen());
             preparedStatement.setInt(2, t.getCuentaDestino());
@@ -114,7 +114,7 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         Connection connection = connectionFactory.getConnection();
         
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM MovimientoBancario");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM movimientobancario");
             ResultSet resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()){

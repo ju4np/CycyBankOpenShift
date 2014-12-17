@@ -20,7 +20,7 @@ public class ConnectionFactoryImplDataSource implements ConnectionFactory{
         try {
             initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            DataSource dataSource = (DataSource)envCtx.lookup("jdbc/cycybank"); 
+            DataSource dataSource = (DataSource)envCtx.lookup("jdbc/MySQLDS"); 
             return dataSource.getConnection();
         } catch (NamingException|SQLException ex) {
             throw new RuntimeException(ex);

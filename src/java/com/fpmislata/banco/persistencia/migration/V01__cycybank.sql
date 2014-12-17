@@ -61,3 +61,5 @@ CREATE TABLE `sucursal` (
   UNIQUE KEY `codigoSucursal` (`codigoSucursal`),
   KEY `FKEntidad` (`entidadBancaria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+INSERT INTO `empleado` (`usuario`, `contraseña`, `nombre`, `dni`, `sucursal`) VALUES ('admin', 'admin', 'Administrador1', '0000000', '00000');

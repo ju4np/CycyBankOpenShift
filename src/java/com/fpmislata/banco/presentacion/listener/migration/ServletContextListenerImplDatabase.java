@@ -41,7 +41,7 @@ public class ServletContextListenerImplDatabase implements ServletContextListene
             
             //Ejecutamos los script de sql
             initialContext = new InitialContext();
-            this.dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/cycybank");
+            this.dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/MySQLDS");
             initialContext.close();
             
             Flyway flyway = new Flyway();

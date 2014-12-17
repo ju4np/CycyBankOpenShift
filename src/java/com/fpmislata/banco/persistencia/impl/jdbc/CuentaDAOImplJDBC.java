@@ -115,7 +115,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
         Connection connection = connectionFactory.getConnection();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Cuenta");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM cuenta");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
