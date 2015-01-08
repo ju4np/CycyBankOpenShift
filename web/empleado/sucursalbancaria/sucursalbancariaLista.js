@@ -3,13 +3,12 @@
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria"
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.sucursalesBancarias = data;
-                }).error(function(data, status, headers, config) {
+                }).error(function() {
                  $location.url("/loginrequired");
             });
         };
         
-        //Cargamos el findall
         $scope.findAll();
     }]);

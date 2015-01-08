@@ -14,10 +14,9 @@ app.controller("EmpleadoDetallesInsertController", ["$scope", "$http", "$routePa
                 url: contextPath + "/api/Empleado",
                 data: $scope.empleado
             }).success(function () {
-                alert("¡Registro insertado!");
                 window.location.assign("#/empleado/empleados");
-            }).error(function (status) {
-                alert("Error " + status);
+            }).error(function () {
+                alert("No se ha podido insertar el empleado.");
             });
         };
 
@@ -36,7 +35,7 @@ app.controller("EmpleadoDetallesUpdateController", ["$scope", "$http", "$routePa
             }).success(function (data) {
                 $scope.empleado = data;
             }).error(function (status) {
-                alert("Error " + status);
+                alert("Error: " + status);
             });
         };
 
@@ -49,10 +48,9 @@ app.controller("EmpleadoDetallesUpdateController", ["$scope", "$http", "$routePa
                 url: contextPath + "/api/Empleado/",
                 data: $scope.empleado
             }).success(function () {
-                alert("¡Registro modificado!");
                 window.location.assign("#/empleado/empleados");
             }).error(function () {
-                alert("¡Que no va!");
+                alert("No se pudo modificar el empleado.");
             });
         };
 

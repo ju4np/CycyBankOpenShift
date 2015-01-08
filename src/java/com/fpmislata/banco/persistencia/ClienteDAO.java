@@ -5,5 +5,5 @@ import com.fpmislata.banco.dominio.Cliente;
 
 
 public interface ClienteDAO extends GenericDAO<Cliente,Integer>{
-    public Cliente getByUsuario(String Usuario);
+    public Cliente getByUsuario(String usuario);
 }

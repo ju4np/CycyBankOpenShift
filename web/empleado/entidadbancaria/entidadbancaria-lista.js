@@ -9,7 +9,7 @@ app.controller("EntidadBancariaListaController", ["$location","$scope", "$http",
                 url: contextPath + "/api/EntidadBancaria"
             }).success(function(data) {
                 $scope.entidadesBancarias = data;
-            }).error(function(data, status, headers, config) {
+            }).error(function() {
                  $location.url("/loginrequired");
             });
 
@@ -26,13 +26,12 @@ app.controller("EntidadBancariaListaController", ["$location","$scope", "$http",
 
         $scope.borrarRegistro = function(id) {
 
-            if (confirm('Do you want to delete Entidad Bancaria ' + id + '?')) {
+            if (confirm('¿Está seguro de que quiere borrar la entidad bancaria ' + id + '?')) {
 
                 $http({
                     method: "DELETE",
                     url: contextPath + "/api/EntidadBancaria/" + id
                 }).success(function() {
-                    alert("¡Registro borrado!");
                     $scope.cargarEntidadesBancarias();
                 }).error(function() {
                     alert("Error: " + status);

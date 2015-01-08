@@ -3,10 +3,10 @@
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria/" + $routeParams.id
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.sucursalBancaria = data;
-            }).error(function(data, status, headers, config) {
-                alert("ERRRORRRRRRRRRRR!!(" + status + ")");
+            }).error(function(status) {
+                alert("Error: " + status);
             });
         };
         $scope.getSucursal();
@@ -16,11 +16,10 @@
                 $http({
                     method: "DELETE",
                     url: contextPath + "/api/SucursalBancaria/" + id
-                }).success(function(data, status, headers, config) {
-                    alert("Registro borrado");
+                }).success(function() {
                     window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-                    }).error(function(data, status, headers, config) {
-                    alert("ERRRORRRRRRRRRRR!!(" + status + ")");
+                    }).error(function() {
+                    alert("No se pudo borrar la sucursal bancaria.");
                 });
             }
         };
@@ -33,14 +32,12 @@
                 method: "POST",
                 data: $scope.sucursalBancaria,
                 url: contextPath + "/api/SucursalBancaria/"
-            }).success(function(data, status, headers, config) {
-                alert("Registro insertado");
+            }).success(function() {
                 window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-                }).error(function(data, status, headers, config) {
-                alert("ERRRORRRRRRRRRRR!!(" + status + ")");
+                }).error(function() {
+                alert("No se pudo insertar la sucursal bancaria.");
             });
         };
-        //Le indicamos si es insert,update o delete
         $scope.action = "insert";
     }]);
 
@@ -49,14 +46,14 @@
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria/" + $routeParams.id
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.sucursalBancaria = data;
-            }).error(function(data, status, headers, config) {
-                alert("ERRRORRRRRRRRRRR!!(" + status + ")");
+            }).error(function(status) {
+                alert("Error: " + status);
             });
         };
         $scope.getSucursal();
-        //Le indicamos si es insert,update o delete
+
         $scope.action = "update";
 
         $scope.updateSucursal = function() {
@@ -64,11 +61,10 @@
                 method: "PUT",
                 data: $scope.sucursalBancaria,
                 url: contextPath + "/api/SucursalBancaria/"
-            }).success(function(data, status, headers, config) {
-                alert("Registro actualizado");
+            }).success(function() {
                 window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-                }).error(function(data, status, headers, config) {
-                alert("ERRRORRRRRRRRRRR!!(" + status + ")");
+                }).error(function() {
+                alert("No se ha podido modificar la sucursal bancaria.");
             });
         };
     }]);

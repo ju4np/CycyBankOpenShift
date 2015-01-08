@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+  <class name="com.fpmislata.banco.dominio.Cliente" table="cliente" > 
+        <id column="idCliente" name="idCliente" type="integer"/> 
+        
+        <property name="usuario" />
+        <property name="contrasenya" column="contraseña"/>
+        <property name="nombre" />       
+        <property name="dni" />       
+        
+    </class>
+
+</hibernate-mapping>

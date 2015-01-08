@@ -3,9 +3,9 @@ app.controller("CuentaListController", ["$location","$scope", "$http", function 
             $http({
                 method: "GET",
                 url: contextPath + "/api/cuentas"
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.cuentas = data;
-            }).error(function(data, status, headers, config) {
+            }).error(function() {
                 $location.url("/loginrequired");
             });
         };

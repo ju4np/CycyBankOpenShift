@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.datasource">java:comp/env/jdbc/MySQLDS</property>
+        <property name="hibernate.show_sql">false</property>
+        
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/EntidadBancaria.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.EntidadBancaria"/>
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/Empleado.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.Empleado"/>
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/Cuenta.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.Cuenta"/>
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/Cliente.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.Cliente"/>
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/MovimientoBancario.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.MovimientoBancario"/>
+        <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/SucursalBancaria.hbm.xml"/>
+        <mapping class="com.fpmislata.banco.dominio.SucursalBancaria"/>
+    </session-factory>
+</hibernate-configuration>

@@ -95,7 +95,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
         Connection connection = connectionFactory.getConnection();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Cuenta WHERE idCuenta=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM cuenta WHERE idCuenta=?");
 
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

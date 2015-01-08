@@ -9,7 +9,7 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
             }).success(function(data, status, headers, config) {
                 $scope.cliente = data;
             }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo encontrar: " );
+                alert("No existe o no se pudo encontrar." );
             });
 
         };
@@ -20,10 +20,9 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
                 method: "DELETE",
                 url: contextPath + "/api/Cliente/" +idCliente
             }).success(function(data, status, headers, config) {
-                alert("Se ha borrado corrrectamente");
                 window.location.assign("#/cliente/clientes");
             }).error(function(data, status, headers, config) {
-                alert("no Existe o no se pudo borrar");
+                alert("No existe o no se pudo borrar.");
             });
         };
 

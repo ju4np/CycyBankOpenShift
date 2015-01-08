@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+ <class name="com.fpmislata.banco.dominio.MovimientoBancario" table="movimientobancario" > 
+        <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer"/> 
+        
+        <property name="cuentaOrigen" />
+        <property name="cuentaDestino" />
+        <property name="cantidad" />       
+        <property name="motivo" />       
+        
+    </class>
+
+
+</hibernate-mapping>

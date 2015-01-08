@@ -9,7 +9,7 @@ app.controller("EmpleadoListaController", ["$location","$scope", "$http", functi
                 url: contextPath + "/api/Empleado"
             }).success(function(data) {
                 $scope.empleados = data;
-            }).error(function(data, status) {
+            }).error(function() {
                  $location.url("/loginrequired");
             });
 
@@ -26,18 +26,15 @@ app.controller("EmpleadoListaController", ["$location","$scope", "$http", functi
 
         $scope.borrarRegistro = function(id) {
 
-            if (confirm('Do you want to delete Empleado ' + id + '?')) {
-
+            if (confirm('¿Está seguro de que quiere borrar el empleado ' + id + '?')) {
                 $http({
                     method: "DELETE",
                     url: contextPath + "/api/Empleado/" + id
                 }).success(function() {
-                    alert("¡Registro borrado!");
                     $scope.cargarEntidadesBancarias();
                 }).error(function() {
                     alert("Error: " + status);
                 });
-
             }
         };
 

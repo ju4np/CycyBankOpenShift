@@ -17,10 +17,9 @@ app.controller("EntidadBancariaDetallesInsertController", ["$scope", "$http", "$
                 url: contextPath + "/api/EntidadBancaria/",
                 data: $scope.entidadBancaria
             }).success(function () {
-                alert("¡Registro insertado!");
                 window.location.assign("#/entidadbancaria/entidades");
             }).error(function (status) {
-                alert("Error " + status);
+                alert("No se ha podido insertar la entidad bancaria");
             });
         };
 
@@ -38,7 +37,7 @@ app.controller("EntidadBancariaDetallesUpdateController", ["$scope", "$http", "$
             }).success(function (data) {
                 $scope.entidadBancaria = data;
             }).error(function (status) {
-                alert("Error " + status);
+                alert("Error: " + status);
             });
         };
 
@@ -51,10 +50,9 @@ app.controller("EntidadBancariaDetallesUpdateController", ["$scope", "$http", "$
                 url: contextPath + "/api/EntidadBancaria/",
                 data: $scope.entidadBancaria
             }).success(function () {
-                alert("¡Registro modificado!");
                 window.location.assign("#/entidadbancaria/entidades");
             }).error(function () {
-                alert("¡Que no va!");
+                alert("No se ha podido modificar la entidad bancaria.");
             });
         };
 

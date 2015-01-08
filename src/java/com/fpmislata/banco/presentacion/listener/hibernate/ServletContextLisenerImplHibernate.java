@@ -1,8 +1,9 @@
 
 package com.fpmislata.banco.presentacion.listener.hibernate;
 
-import static com.fpmislata.banco.persistencia.impl.hibernate.HibernateUtil.buildSessionFactory;
-import static com.fpmislata.banco.persistencia.impl.hibernate.HibernateUtil.closeSessionFactory;
+
+import static com.fpmislata.banco.persistencia.impl.hibernate.commons.HibernateUtil.buildSessionFactory;
+import static com.fpmislata.banco.persistencia.impl.hibernate.commons.HibernateUtil.closeSessionFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

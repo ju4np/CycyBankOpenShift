@@ -1,29 +1,27 @@
 app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
 
-        $scope.action="delete";
+        $scope.action = "delete";
         $scope.get = function() {
             $http({
                 method: "GET",
                 url: contextPath + "/api/MovimientoBancario/" + $routeParams.id
-
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.movimientoBancario = data;
-            }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo encontrar: " );
+            }).error(function() {
+                alert("No existe o no se pudo encontrar.");
             });
 
         };
-            $scope.get();
+        $scope.get();
 
         $scope.deleteMovimiento = function(id) {
             $http({
                 method: "DELETE",
-                url: contextPath + "/api/MovimientoBancario/" +id
-            }).success(function(data, status, headers, config) {
-                alert("Se ha borrado correctamente");
+                url: contextPath + "/api/MovimientoBancario/" + id
+            }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function(data, status, headers, config) {
-                alert("no Existe o no se pudo borrar");
+            }).error(function() {
+                alert("No existe o no se pudo borrar.");
             });
         };
 
@@ -32,53 +30,49 @@ app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "
     }]);
 
 app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
-        $scope.action="update";
+        $scope.action = "update";
         $scope.get = function() {
             $http({
                 method: "GET",
                 url: contextPath + "/api/MovimientoBancario/" + $routeParams.id
-
-            }).success(function(data, status, headers, config) {
+            }).success(function(data) {
                 $scope.movimientoBancario = data;
-            }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo encontrar: " );
+            }).error(function() {
+                alert("No existe o no se pudo encontrar.");
             });
 
         };
-            $scope.get();
+        $scope.get();
 
         $scope.modificarMovimiento = function() {
             $http({
                 method: "PUT",
-                url: contextPath + "/api/MovimientoBancario/"+$routeParams.id,
+                url: contextPath + "/api/MovimientoBancario/" + $routeParams.id,
                 data: $scope.movimientoBancario
-            }).success(function(data, status, headers, config) {
-                    
-                alert("Se ha modificado correctamente "+status+" "+data);
+            }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function(data, status, headers, config) {
-                alert("no se pudo modificar o no existe");
+            }).error(function() {
+                alert("No se pudo modificar o no existe.");
             });
         };
-        
-        
-}]);
 
-app.controller("MovimientoBancarioDetailInsertarController", ["$scope", "$http",  function($scope, $http) {
-$scope.action="insert";
+
+    }]);
+
+app.controller("MovimientoBancarioDetailInsertarController", ["$scope", "$http", function($scope, $http) {
+        $scope.action = "insert";
         $scope.insertarMovimiento = function() {
             $http({
                 method: "POST",
                 url: contextPath + "/api/MovimientoBancario",
                 data: $scope.movimientoBancario
-            }).success(function(data, status, headers, config) {
-                alert("Se ha insertado correctamente"+data);
+            }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function(data, status, headers, config) {
-                alert("no se pudo insertar el Movimiento");
+            }).error(function() {
+                alert("No se pudo insertar el movimiento.");
             });
         };
-        
+
     }]);
 
 

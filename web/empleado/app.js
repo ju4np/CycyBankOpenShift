@@ -5,9 +5,9 @@ app.run(function($rootScope, $http) {
         $http({
             method: "GET",
             url: contextPath + "/api/session/empleado"
-        }).success(function(data, status, headers, config) {
+        }).success(function(data) {
             $rootScope.empleado = data;
-        }).error(function(data, status, headers, config) {
+        }).error(function() {
             $rootScope.empleado = null;
         });
     };
@@ -17,10 +17,10 @@ app.run(function($rootScope, $http) {
         $http({
             method: "DELETE",
             url: contextPath + "/api/session/empleado"
-        }).success(function(data, status, headers, config) {
+        }).success(function() {
             $rootScope.empleado = null;
             window.location.assign("#/");
-        }).error(function(data, status, headers, config) {
+        }).error(function(status) {
             alert("Error: " + status);
         });
     };
