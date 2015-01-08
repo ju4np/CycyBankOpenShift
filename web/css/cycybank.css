@@ -105,4 +105,16 @@ footer {
     header.carousel .carousel {
         height: 70%;
     }
+
+    #bs-example-navbar-collapse-1{
+        background-color: black;
+        width: 50%;
+        float: right;
+        overflow: hidden;
+    }
+    
+    .desplegable{
+        text-align: right;
+        margin-right: 15pt;
+    }
 }
