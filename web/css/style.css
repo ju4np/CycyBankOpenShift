@@ -51,7 +51,8 @@ div#content {
   div#content #contenido {
     padding-top: 5pt;
     float: right;
-    overflow: auto; }
+    overflow: auto;
+    margin-bottom: 25pt; }
     div#content #contenido div#tabla a {
       padding-left: 10pt; }
     div#content #contenido div#tabla table a {

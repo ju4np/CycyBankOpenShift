@@ -7,7 +7,7 @@ import static com.fpmislata.banco.persistencia.impl.hibernate.commons.HibernateU
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class ServletContextLisenerImplHibernate implements ServletContextListener {
+public class ServletContextListenerImplHibernate implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {

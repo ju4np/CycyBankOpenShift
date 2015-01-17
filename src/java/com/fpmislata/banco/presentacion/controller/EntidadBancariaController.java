@@ -1,8 +1,9 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.EntidadBancaria;
 import com.fpmislata.banco.persistencia.EntidadBancariaDAO;
-import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ public class EntidadBancariaController {
 
     @Autowired // va al applicationContext.xml a buscar la implementacion
     EntidadBancariaDAO entidadBancariaDAO;
+    @Autowired
+    SucursalBancariaDAO sucursalBancariaDAO;
 
     @Autowired // va al applicationContext.xml a buscar la implementacion
     JsonConvert jsonConvert;
@@ -61,6 +64,7 @@ public class EntidadBancariaController {
 //        httpServletResponse.setStatus(204);
 
     }
+    
 
     
     @RequestMapping(value = {"/EntidadBancaria"})
@@ -70,6 +74,18 @@ public class EntidadBancariaController {
             List entidadesBancarias = entidadBancariaDAO.findAll();
             httpServletResponse.getWriter().println(jsonConvert.toJson(entidadesBancarias));
 
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}/Sucursales"})
+    public void getSucursalesByIdEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+        try {
+
+            List sucursalesBancarias = sucursalBancariaDAO.getSucursales(idEntidadBancaria);
+            httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalesBancarias));
+            //httpServletResponse.getWriter().println("Hola");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

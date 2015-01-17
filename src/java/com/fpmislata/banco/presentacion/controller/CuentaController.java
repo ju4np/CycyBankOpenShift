@@ -63,7 +63,7 @@ public class CuentaController {
     }
 
     @RequestMapping(value = {"/cuentas"}, method = RequestMethod.GET)
-    public void findall(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse/*, @PathVariable("idEntidad") int idEntidad*/) throws IOException {
+    public void findall(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse) throws IOException {
 
         try {
             List<Cuenta> cuentas = cuentaDAO.findAll();
@@ -114,8 +114,6 @@ public class CuentaController {
         try {
 
             Cuenta cuenta = (Cuenta) jsonConvert.fromJson(json, Cuenta.class);
-
-          
 
             cuentaDAO.update(cuenta);  
 

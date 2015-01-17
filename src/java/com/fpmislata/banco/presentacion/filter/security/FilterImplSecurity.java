@@ -33,7 +33,6 @@ public class FilterImplSecurity implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
         }
     }
 

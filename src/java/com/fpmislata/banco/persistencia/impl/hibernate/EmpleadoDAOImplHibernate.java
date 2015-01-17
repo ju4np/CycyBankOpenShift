@@ -12,14 +12,21 @@ import org.hibernate.SessionFactory;
 
 
 public class EmpleadoDAOImplHibernate extends GenericDAOImplHibernate<Empleado,Integer> implements EmpleadoDAO{
-    public Empleado getByUsuario(String usuario){        
+    @Override
+    public Empleado getByUsuario(String usuario){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         
         Query query = session.createQuery("SELECT empleado FROM Empleado empleado WHERE usuario=?");
         query.setString(0, usuario);
         List<Empleado> lista = query.list();
-        Empleado empleado = lista.get(0);
-        return empleado;       
+        Empleado empleado;
+        if(!lista.isEmpty()){
+            empleado = lista.get(0);
+        } else {
+            empleado = null;
+        }
+        
+        return empleado;
     }
 }

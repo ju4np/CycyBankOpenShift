@@ -4,6 +4,7 @@
     <session-factory>
         <property name="connection.datasource">java:comp/env/jdbc/MySQLDS</property>
         <property name="hibernate.show_sql">false</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
         
         <mapping resource="com/fpmislata/banco/persistencia/impl/hibernate/EntidadBancaria.hbm.xml"/>
         <mapping class="com.fpmislata.banco.dominio.EntidadBancaria"/>

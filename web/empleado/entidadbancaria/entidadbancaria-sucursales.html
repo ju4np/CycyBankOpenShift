@@ -1,0 +1,37 @@
+<h2>Entidad Bancaria: </h2>
+<div id="tabla">
+    <table>
+        <tr>
+            <th>Id Entidad</th>
+            <th>Nombre Entidad</th>
+            <th>Código Entidad</th>
+        </tr>
+
+        <tr>
+            <td>{{entidadBancaria.idEntidadBancaria}}</td>
+            <td>{{entidadBancaria.nombre}}</td>
+            <td>{{entidadBancaria.codigoEntidad}}</td>
+        </tr>
+    </table>
+</div>
+<br/>
+<h2>Sucursales Bancarias de esta Entidad: </h2>
+<div id="tabla">
+    <table>
+        <tr>
+            <th>Id Sucursal</th>
+            <th>Localización</th>
+            <th>Código Sucursal</th>
+            <th>Entidad Bancaria</th>
+            <th>Nombre Sucursal</th>
+        </tr>
+
+        <tr ng-repeat="sucursalBancaria in sucursalesBancarias">
+            <td>{{sucursalBancaria.idSucursal}}</td>
+            <td>{{sucursalBancaria.localizacion}}</td>
+            <td>{{sucursalBancaria.codigoSucursal}}</td>
+            <td>{{sucursalBancaria.entidadBancaria}}</td>
+            <td>{{sucursalBancaria.nombreSucursal}}</td>
+        </tr>
+    </table>
+</div>

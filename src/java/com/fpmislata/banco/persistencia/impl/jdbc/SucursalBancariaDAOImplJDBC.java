@@ -1,5 +1,6 @@
 package com.fpmislata.banco.persistencia.impl.jdbc;
 
+import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.dominio.SucursalBancaria;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import com.fpmislata.banco.persistencia.impl.jdbc.connection.ConnectionFactory;
@@ -125,6 +126,12 @@ public class SucursalBancariaDAOImplJDBC implements SucursalBancariaDAO {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+
+    @Override
+    public List<SucursalBancaria> getSucursales(Integer idEntidadBancaria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

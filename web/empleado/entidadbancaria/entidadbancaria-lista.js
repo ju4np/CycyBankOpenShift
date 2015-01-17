@@ -19,12 +19,15 @@ app.controller("EntidadBancariaListaController", ["$location","$scope", "$http",
        $scope.cargarEntidadesBancarias();
 
 
-        $scope.editar = function(id) {
+        $scope.editarEntidadBancaria = function(id) {
             location.href = "#/entidadbancaria/detalles/" + id;
         };
+        
+ $scope.verSucursalesDeEntidadBancaria = function(id) {
+            location.href = "#/entidadbancaria/"+id+"/sucursales" ;
+        };
 
-
-        $scope.borrarRegistro = function(id) {
+        $scope.borrarEntidadBancaria = function(id) {
 
             if (confirm('¿Está seguro de que quiere borrar la entidad bancaria ' + id + '?')) {
 

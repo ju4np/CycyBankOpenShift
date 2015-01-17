@@ -8,6 +8,7 @@
             <th>Código Entidad</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
 
         <tr ng-repeat="entidadBancaria in entidadesBancarias">
@@ -16,6 +17,7 @@
             <td>{{entidadBancaria.codigoEntidad}}</td>
             <td><a ng-click="editarEntidadBancaria(entidadBancaria.idEntidadBancaria)">Editar</a></td>
             <td><a ng-click="borrarEntidadBancaria(entidadBancaria.idEntidadBancaria)">Borrar</a></td>
+            <td><a ng-click="verSucursalesDeEntidadBancaria(entidadBancaria.idEntidadBancaria)">Ver Sucursales</a></td>
         </tr>
     </table>
     <br/>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package com.fpmislata.banco.presentacion.filter.hibernate;
 
@@ -15,10 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-/**
- *
- * @author alumno
- */
+
 public class HibernateFilter implements Filter{
      @Override
      public void init(FilterConfig filterConfig) throws ServletException {

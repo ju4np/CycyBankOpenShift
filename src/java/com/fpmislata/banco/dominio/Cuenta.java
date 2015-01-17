@@ -14,7 +14,7 @@ public class Cuenta {
 
     Date fechaCreacion;
 
-    int sucursalBancaria;
+    String sucursalBancaria;
 
     
 
@@ -50,11 +50,11 @@ public class Cuenta {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public int getSucursalBancaria() {
+    public String getSucursalBancaria() {
         return sucursalBancaria;
     }
 
-    public void setSucursalBancaria(int SucursalBancaria) {
+    public void setSucursalBancaria(String SucursalBancaria) {
         this.sucursalBancaria = SucursalBancaria;
     }
 }

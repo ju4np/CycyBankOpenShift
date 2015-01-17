@@ -14,10 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-/**
- *
- * @author JuanPe
- */
+
 public class GenericDAOImplHibernate<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
     private SessionFactory sessionFactory;
@@ -53,7 +50,7 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
         try{
             session.beginTransaction();
             session.save(t);
-            session.beginTransaction().commit();
+            session.getTransaction().commit();
             
             return t;
         } catch(Exception ex){
@@ -70,7 +67,7 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
         try{
             session.beginTransaction();
             session.update(t);
-            session.beginTransaction().commit();
+            session.getTransaction().commit();
             
             return t;
         } catch(Exception ex){
@@ -112,7 +109,7 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
             if(session.getTransaction().isActive()){
                 session.getTransaction().rollback();
             }
-            throw new RuntimeException();
+            throw new RuntimeException(ex);
         }
     }
     
