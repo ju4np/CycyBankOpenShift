@@ -1,0 +1,38 @@
+<h2>Cuenta: </h2>
+<div id="tabla">
+    <table>
+        <tr>
+            <th>Id Cuenta</th>
+            <th>Cliente</th>
+            <th>Saldo</th>
+            <th>Sucursal</th>
+        </tr>
+        <tr>
+            <td>{{cuenta.idCuenta}}</td>
+            <td>{{cuenta.cliente}}</td>
+            <td>{{cuenta.saldo}}</td>
+            <td>{{cuenta.sucursalBancaria}}</td>
+        </tr>
+    </table>
+</div>
+<br/>
+<h2>Movimientos Bancarios de esta Cuenta: </h2>
+<div id="tabla">
+    <table>
+        <tr>
+            <th>Id Movimiento</th>
+            <th>Cuenta Origen</th>
+            <th>Cuenta Destino</th>
+            <th>Cantidad</th>
+            <th>Motivo</th>
+        </tr>
+
+        <tr ng-repeat="movimientoBancario in movimientosBancarios">
+            <td>{{movimientoBancario.idMovimientoBancario}}</td>
+            <td>{{movimientoBancario.cuentaOrigen}}</td>
+            <td>{{movimientoBancario.cuentaDestino}}</td>
+            <td>{{movimientoBancario.cantidad}}</td>
+            <td>{{movimientoBancario.motivo}}</td>
+        </tr>
+    </table>
+</div>

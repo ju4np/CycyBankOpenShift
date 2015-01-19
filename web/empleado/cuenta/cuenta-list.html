@@ -9,6 +9,7 @@
                 <th>sucursalBancaria</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{cuenta.sucursalBancaria}}</td>
                 <td><a ng-href="#/cuenta/update/{{cuenta.idCuenta}}">Editar</a></td>
                 <td><a ng-href="#/cuenta/delete/{{cuenta.idCuenta}}">Borrar</a></td>
+                <td><a ng-click="verMovimientos(cuenta.idCuenta)">Ver Movimientos</a></td>
             </tr>
         </tbody>
     </table>

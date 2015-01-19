@@ -137,4 +137,9 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         
         return lista;
     }
+
+    @Override
+    public List<MovimientoBancario> getMovimientos(Integer idCuenta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

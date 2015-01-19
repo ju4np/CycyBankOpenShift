@@ -1,8 +1,10 @@
 package com.fpmislata.banco.presentacion.controller;
 
-import com.fpmislata.banco.persistencia.CuentaDAO;
-import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.dominio.Cuenta;
+import com.fpmislata.banco.dominio.MovimientoBancario;
+import com.fpmislata.banco.persistencia.CuentaDAO;
+import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +22,8 @@ public class CuentaController {
 
     @Autowired
     CuentaDAO cuentaDAO;
+    @Autowired
+    MovimientoBancarioDAO movimientoBancarioDAO;
     @Autowired
     JsonConvert jsonConvert;
 
@@ -130,6 +134,15 @@ public class CuentaController {
             } catch (IOException ex1) {
             }
         }
-
+    }
+    
+    @RequestMapping(value = {"/cuenta/{idCuenta}/movimientos"})
+    public void getMovimientosByIdCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idCuenta") int idCuenta) {
+        try{
+            List<MovimientoBancario> lista = movimientoBancarioDAO.getMovimientos(idCuenta);
+            httpServletResponse.getWriter().print(jsonConvert.toJson(lista));
+        }catch(IOException ex){
+            throw new RuntimeException(ex);
+        }
     }
 }

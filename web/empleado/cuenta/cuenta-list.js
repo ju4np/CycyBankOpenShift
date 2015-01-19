@@ -11,5 +11,8 @@ app.controller("CuentaListController", ["$location","$scope", "$http", function 
         };
         $scope.mostrarTablaCuenta();
 
+         $scope.verMovimientos = function(idCuenta) {
+            location.href = "#/cuenta/"+idCuenta+"/movimientos" ;
+        };
     }]);
 
