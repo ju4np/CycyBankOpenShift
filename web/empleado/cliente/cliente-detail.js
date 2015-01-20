@@ -25,9 +25,6 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
                 alert("No existe o no se pudo borrar.");
             });
         };
-
-
-
     }]);
 
 
