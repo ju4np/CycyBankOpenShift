@@ -12,7 +12,8 @@
         <property name="usuario" />
         <property name="contrasenya" column="contraseña"/>
         <property name="nombre" />       
-        <property name="dni" />       
+        <property name="dni" />   
+        <property name="fechaNacimiento"/>    
         
     </class>
 

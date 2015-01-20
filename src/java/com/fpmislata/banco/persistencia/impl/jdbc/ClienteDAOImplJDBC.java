@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -143,7 +144,7 @@ public class ClienteDAOImplJDBC implements ClienteDAO {
                     String nombre = rs.getString("nombre");
                     String dni = rs.getString("dni");
 
-                    cliente = new Cliente(idCliente, usuario, contrasenya, nombre, dni);
+                    cliente = new Cliente(idCliente, usuario, contrasenya, nombre, dni, null);
                     listaClientes.add(cliente);
                 }
                 connectionFactory.close(connection);

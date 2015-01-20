@@ -8,6 +8,7 @@
                 <th>Contraseña</th>
                 <th>Nombre</th>
                 <th>DNI</th>
+                <th>Fecha Nacimiento</th>
                 <th></th>
                 <th></th>
 
@@ -20,6 +21,7 @@
                 <td>{{cliente.contrasenya}}</td>
                 <td>{{cliente.nombre}}</td>
                 <td>{{cliente.dni}}</td>
+                <td>{{cliente.fechaNacimiento | date:'dd/MM/yyyy'}}</td>
                 <td><a ng-href="#/cliente/update/{{cliente.idCliente}}">Editar</a></td>
                 <td><a ng-href="#/cliente/delete/{{cliente.idCliente}}">Borrar</a></td>
             </tr>

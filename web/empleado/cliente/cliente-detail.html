@@ -10,6 +10,8 @@
 <input ng-disabled="action==='delete'" type="text" ng-model="cliente.nombre"/><br>
 <span class="col-sm-3">DNI: </span>
 <input ng-disabled="action==='delete'" type="text" ng-model="cliente.dni"/><br>
+<span class="col-sm-3">Fecha Nacimiento: </span>
+<input ng-disabled="action==='delete'" ui-date ng-model="cliente.fechaNacimiento" /><br>
 <button ng-show="action==='delete'" id="borrar" ng-click="deleteCliente(cliente.idCliente)">Borrar Cliente</button>
 <button ng-show="action==='insert'" id="insertar" ng-click="insertarCliente()">Insertar Cliente</button>
 <button ng-show="action==='update'"id="modificar" ng-click="modificarCliente()">Modificar Cliente</button>

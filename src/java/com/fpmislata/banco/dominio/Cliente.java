@@ -1,28 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package com.fpmislata.banco.dominio;
 
-/**
- *
- * @author alumno
- */
+import java.util.Date;
+
+
 public class Cliente {
     int idCliente;
     String usuario;
     String contrasenya;
     String nombre;
     String dni;
+    Date fechaNacimiento;
 
-    public Cliente(int idCliente, String usuario, String contrasenya, String nombre, String dni) {
+    public Cliente(int idCliente, String usuario, String contrasenya, String nombre, String dni, Date fechaNacimiento) {
         this.idCliente = idCliente;
         this.usuario = usuario;
         this.contrasenya = contrasenya;
         this.nombre = nombre;
         this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
     }
     public Cliente(){
         
@@ -67,4 +64,14 @@ public class Cliente {
     public void setDni(String dni) {
         this.dni = dni;
     }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
 }

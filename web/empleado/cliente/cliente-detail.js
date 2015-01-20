@@ -7,7 +7,7 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
                 url: contextPath + "/api/Cliente/" + $routeParams.id
 
             }).success(function(data, status, headers, config) {
-                $scope.cliente = data;
+                $scope.cliente = data; 
             }).error(function(data, status, headers, config) {
                 alert("No existe o no se pudo encontrar." );
             });
@@ -45,6 +45,7 @@ app.controller("ClienteDetailModificarController", ["$scope", "$http", "$routePa
 
             }).success(function(data, status, headers, config) {
                 $scope.cliente = data;
+                $scope.cliente.fechaNacimiento=new Date($scope.cliente.fechaNacimiento);
             }).error(function(data, status, headers, config) {
                 alert("No existe o no se pudo encontrar: " );
             });
@@ -58,7 +59,6 @@ app.controller("ClienteDetailModificarController", ["$scope", "$http", "$routePa
                 url: contextPath + "/api/Cliente",
                 data: $scope.cliente
             }).success(function(data, status, headers, config) {     
-                alert("Se ha modificado corrrectamente "+status+" "+data);
                 window.location.assign("#/cliente/clientes");
             }).error(function(data, status, headers, config) {
                 alert("no se pudo modificar o no existe");
@@ -76,7 +76,6 @@ app.controller("ClienteDetailInsertController", ["$scope", "$http", function($sc
                 url: contextPath + "/api/Cliente/",
                 data: $scope.cliente
             }).success(function(data, status, headers, config) {
-                alert("Se ha insertado corrrectamente");
                 window.location.assign("#/cliente/clientes");
             }).error(function(data, status, headers, config) {
                 alert("no se pudo insertar la entidad");

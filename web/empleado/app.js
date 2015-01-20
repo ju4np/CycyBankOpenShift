@@ -1,4 +1,9 @@
-var app = angular.module("app", ['ngRoute']);
+var app = angular.module("app", ['ngRoute','ui.date']);
+
+app.constant('uiDateConfig',{
+	dateFormat: "dd/mm/yy",
+	firstDay: 1
+});
 
 app.run(function($rootScope, $http) {
     $rootScope.logcheck = function() {
@@ -25,4 +30,6 @@ app.run(function($rootScope, $http) {
         });
     };
 });
+
+
 
