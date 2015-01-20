@@ -10,7 +10,7 @@
         <tr>
             <td>{{cuenta.idCuenta}}</td>
             <td>{{cuenta.cliente}}</td>
-            <td>{{cuenta.saldo}}</td>
+            <td>{{cuenta.saldo | currency:"€":2}}</td>
             <td>{{cuenta.sucursalBancaria}}</td>
         </tr>
     </table>
@@ -31,7 +31,7 @@
             <td>{{movimientoBancario.idMovimientoBancario}}</td>
             <td>{{movimientoBancario.cuentaOrigen}}</td>
             <td>{{movimientoBancario.cuentaDestino}}</td>
-            <td>{{movimientoBancario.cantidad}}</td>
+            <td>{{movimientoBancario.cantidad | currency:"€":2}}</td>
             <td>{{movimientoBancario.motivo}}</td>
         </tr>
     </table>

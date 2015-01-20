@@ -137,5 +137,10 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
 
         return cuentas;
     }
+
+    @Override
+    public List<Cuenta> getCuentas(Integer idSucursalBancaria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 

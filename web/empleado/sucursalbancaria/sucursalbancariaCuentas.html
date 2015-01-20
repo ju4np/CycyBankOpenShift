@@ -1,15 +1,46 @@
 <div id="contenedor">
-    <h2>Sucursal Bancaria</h2>
-    <span ng-show="action==='update'||action==='delete'" class="col-sm-4">Id Sucursal: </span>
-    <input ng-show="action==='update'||action==='delete'" type="text" ng-model="sucursalBancaria.idSucursal" ng-disabled="action==='update'"/><br/>
-    <span class="col-sm-4">Localizacion sucursal: </span>
-    <input type="text" ng-model="sucursalBancaria.localizacion" /><br/>
-    <span class="col-sm-4">Codigo Sucursal:  </span>
-    <input type="text" ng-model="sucursalBancaria.codigoSucursal" /><br/>
-    <span class="col-sm-4">Entidad Bancaria:  </span>
-    <input type="text" ng-model="sucursalBancaria.entidadBancaria" /><br/>
-    <span class="col-sm-4">Nombre Sucursal:  </span>
-    <input type="text" ng-model="sucursalBancaria.nombreSucursal" /><br/>
-    <button ng-click="insertSucursal()" ng-show="action==='insert'">Insertar sucursal</button>
-    <button ng-click="updateSucursal()" ng-show="action==='update'">Actualizar sucursal</button>
+
+
+    <h2>Sucursal Bancaria: </h2>
+    <div class="tabla">
+        <table>
+            <tr>
+                <th>Id Sucursal</th>
+                <th>Localización</th>
+                <th>Código</th>
+                <th>Entidad Bancaria</th>
+                <th>Nombre</th>
+            </tr>
+
+            <tr>
+                <td>{{sucursalBancaria.idSucursal}}</td>
+                <td>{{sucursalBancaria.localizacion}}</td>
+                <td>{{sucursalBancaria.codigoSucursal}}</td>
+                <td>{{sucursalBancaria.entidadBancaria}}</td>
+                <td>{{sucursalBancaria.nombreSucursal}}</td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    
+    <h2>Cuentas asociadas: </h2>
+    <div id="tabla">
+        <table>
+            <tr>
+                <th>Id Cuenta</th>
+                <th>Cliente</th>
+                <th>Saldo</th>
+                <th>Sucursal</th>
+            </tr>
+
+            <tr ng-repeat="cuenta in cuentas">
+                <td>{{cuenta.idCuenta}}</td>
+                <td>{{cuenta.cliente}}</td>
+                <td>{{cuenta.saldo | currency:"€":2}}</td>
+                <td>{{cuenta.sucursalBancaria}}</td>
+            </tr>
+        </table>
+    </div>
+    
+    
 </div>

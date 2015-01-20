@@ -23,7 +23,7 @@
                         <td>{{sucursalBancaria.nombreSucursal}}</td>
                         <td><a ng-href="#/sucursalbancaria/update/{{sucursalBancaria.idSucursal}}">Editar</a></td>
                         <td><a ng-href="#/sucursalbancaria/delete/{{sucursalBancaria.idSucursal}}">Borrar</a></td>
-                        <td><a ng-href="#/sucursalbancaria/{{sucursalBancaria.idSucursal}}">Ver Detalles</a></td>
+                        <td><a ng-click="verCuentasDeSucursalBancaria(sucursalBancaria.idSucursal)">Ver Cuentas</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -17,7 +17,7 @@
                 <td>{{movimientoBancario.idMovimientoBancario}}</td>
                 <td>{{movimientoBancario.cuentaOrigen}}</td>
                 <td>{{movimientoBancario.cuentaDestino}}</td>
-                <td>{{movimientoBancario.cantidad}}</td>
+                <td>{{movimientoBancario.cantidad | currency: '€':2}}</td>
                 <td>{{movimientoBancario.motivo}}</td>
                 <td><a ng-href="#/movimientobancario/Update/{{movimientoBancario.idMovimientoBancario}}">Editar</a></td>
                 <td><a ng-href="#/movimientobancario/Delete/{{movimientoBancario.idMovimientoBancario}}">Borrar</a></td>

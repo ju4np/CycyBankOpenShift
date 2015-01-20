@@ -1,4 +1,3 @@
-
 app.controller("EmpleadoListaController", ["$location","$scope", "$http", function($location,$scope, $http) {
 
 

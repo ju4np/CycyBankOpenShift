@@ -145,4 +145,14 @@ public class CuentaController {
             throw new RuntimeException(ex);
         }
     }
+    
+    @RequestMapping(value = {"/SucursalBancaria/{idSucursalBancaria}/Cuentas"})
+    public void getCuentasBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idSucursalBancaria") int idSucursalBancaria) {
+        try {
+            List cuentas =  cuentaDAO.getCuentas(idSucursalBancaria);
+            httpServletResponse.getWriter().println(jsonConvert.toJson(cuentas));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

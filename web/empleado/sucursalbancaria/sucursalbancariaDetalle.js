@@ -1,4 +1,4 @@
- app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
+app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
         $scope.getSucursal = function() {
             $http({
                 method: "GET",

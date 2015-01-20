@@ -16,7 +16,7 @@
             <tr ng-repeat="cuenta in cuentas">
                 <td>{{cuenta.idCuenta}}</td>
                 <td>{{cuenta.cliente}}</td>
-                <td>{{cuenta.saldo}}</td>
+                <td>{{cuenta.saldo | currency:"€":2}}</td>
                 <td>{{cuenta.sucursalBancaria}}</td>
                 <td><a ng-href="#/cuenta/update/{{cuenta.idCuenta}}">Editar</a></td>
                 <td><a ng-href="#/cuenta/delete/{{cuenta.idCuenta}}">Borrar</a></td>
