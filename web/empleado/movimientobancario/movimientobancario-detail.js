@@ -61,6 +61,7 @@ app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http"
 
 app.controller("MovimientoBancarioDetailInsertarController", ["$scope", "$http", function($scope, $http) {
         $scope.action = "insert";
+        $scope.movimientoBancario={};
         $scope.insertarMovimiento = function() {
             $http({
                 method: "POST",
@@ -72,7 +73,15 @@ app.controller("MovimientoBancarioDetailInsertarController", ["$scope", "$http",
                 alert("No se pudo insertar el movimiento.");
             });
         };
-
+        $scope.tiposMovimientosBancarios = [
+            {
+                id: "DEBE",
+                titulo: 'Debe'
+            }, {
+                id: "HABER",
+                titulo: 'Haber'
+            }
+        ];
     }]);
 
 

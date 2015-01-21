@@ -1,4 +1,4 @@
-
+/*
 package com.fpmislata.banco.persistencia.impl.jdbc;
 
 import com.fpmislata.banco.dominio.MovimientoBancario;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  *
  * @author JuanPe
- */
+ *
 public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
     @Autowired
     ConnectionFactory connectionFactory;
@@ -143,3 +143,4 @@ public class MovimientoBancarioDAOImplJDBC implements MovimientoBancarioDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
+*/

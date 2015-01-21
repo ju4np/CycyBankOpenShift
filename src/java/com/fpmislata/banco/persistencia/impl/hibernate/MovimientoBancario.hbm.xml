@@ -2,14 +2,19 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
- <class name="com.fpmislata.banco.dominio.MovimientoBancario" table="movimientobancario" > 
+    <class name="com.fpmislata.banco.dominio.MovimientoBancario" table="movimientobancario" > 
         <id column="idMovimientoBancario" name="idMovimientoBancario" type="integer"/> 
         
         <property name="cuentaOrigen" />
         <property name="cuentaDestino" />
         <property name="cantidad" />       
         <property name="motivo" />       
-        
+        <property name="tipoMovimientoBancario"  column="tipoMovimientoBancario">    
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.fpmislata.banco.dominio.TipoMovimientoBancario</param>
+                <param name="type">12</param>    
+            </type>           
+        </property>
     </class>
 
 

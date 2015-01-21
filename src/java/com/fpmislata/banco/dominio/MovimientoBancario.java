@@ -1,5 +1,8 @@
 package com.fpmislata.banco.dominio;
 
+import com.fpmislata.banco.dominio.TipoMovimientoBancario;
+
+
 public class MovimientoBancario {
 
     int idMovimientoBancario;
@@ -12,21 +15,26 @@ public class MovimientoBancario {
 
     String motivo;
 
-    public MovimientoBancario(int idMovimientoBancario, int CuentaOrigen, int CuentaDestino, double cantidad, String motivo) {
+    private TipoMovimientoBancario tipoMovimientoBancario;
+
+    public MovimientoBancario(int idMovimientoBancario, int CuentaOrigen, int CuentaDestino, double cantidad, String motivo, TipoMovimientoBancario tipoMovimientoBancario) {
         this.idMovimientoBancario = idMovimientoBancario;
         this.CuentaOrigen = CuentaOrigen;
         this.CuentaDestino = CuentaDestino;
         this.cantidad = cantidad;
         this.motivo = motivo;
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
+
     }
-    
-    public MovimientoBancario(){}
-    
+    public MovimientoBancario(){
+        
+    }
+
     public int getIdMovimientoBancario() {
         return idMovimientoBancario;
     }
-    
-     public void setIdMovimientoBancario(int idMovimientoBancario){
+
+    public void setIdMovimientoBancario(int idMovimientoBancario) {
         this.idMovimientoBancario = idMovimientoBancario;
     }
 
@@ -60,5 +68,19 @@ public class MovimientoBancario {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    /**
+     * @return the tipoMovimientoBancario
+     */
+    public TipoMovimientoBancario getTipoMovimientoBancario() {
+        return tipoMovimientoBancario;
+    }
+
+    /**
+     * @param tipoMovimientoBancario the tipoMovimientoBancario to set
+     */
+    public void setTipoMovimientoBancario(TipoMovimientoBancario tipoMovimientoBancario) {
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
     }
 }
