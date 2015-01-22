@@ -68,4 +68,27 @@
     nbproject/build-impl.xml file. 
 
     -->
+        <target name="-pre-dist" if="openshift">
+        <delete file="./build/web/META-INF/context.xml"/>
+        <move file="./build/web/META-INF/context-openshift.xml" tofile="./build/web/META-INF/context.xml"/>
+    </target>
+    
+    <target name="-post-dist" if="openshift" >
+        
+        <move file="./dist/cycycorp.war" tofile="./dist/ROOT.war"/>
+    </target>
+    
+    <target name="desplegarOpenShift" depends="enableOpenShift,dist">
+        <!-- git clone 
+        //copiar root.war al repo clonado
+        //git commit
+        //git push -->
+    </target>
+    
+    <target name="enableOpenShift">
+        <property name="libs.CopyLibs.classpath" value="ant/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
+        <property name="j2ee.server.home" value="ant" />
+        <property name="openshift" value="true" />
+    </target>
+    
 </project>
