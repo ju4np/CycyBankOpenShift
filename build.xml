@@ -102,7 +102,11 @@
         
         <delete dir="../tomcat"/>
 
-        
+        <git
+            command="clone"
+            options="ssh://54896966fcf9333c65000124@tomcat-cycycorpstore.rhcloud.com/~/git/tomcat.git/"
+            dir="../"
+        />
     </target>
     
     <target name="enableOpenShift">
