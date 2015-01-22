@@ -1,4 +1,3 @@
-
 app.config(['$routeProvider', function($routeProvider) {
 
         $routeProvider.when('/cliente/clientes', {

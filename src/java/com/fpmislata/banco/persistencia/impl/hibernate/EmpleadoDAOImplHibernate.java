@@ -1,4 +1,3 @@
-
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
 import com.fpmislata.banco.dominio.Empleado;

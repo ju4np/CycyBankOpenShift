@@ -1,5 +1,3 @@
-
-
 package com.fpmislata.banco.presentacion.filter.hibernate;
 
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.HibernateUtil;

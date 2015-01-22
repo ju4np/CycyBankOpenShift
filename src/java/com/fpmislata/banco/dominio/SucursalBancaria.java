@@ -1,10 +1,6 @@
 
 package com.fpmislata.banco.dominio;
 
-/**
- *
- * @author CycyCorp
- */
 public class SucursalBancaria {
     //Aributos
     int idSucursal;

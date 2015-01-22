@@ -10,7 +10,6 @@ app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "
             }).error(function() {
                 alert("No existe o no se pudo encontrar.");
             });
-
         };
         $scope.get();
 
@@ -24,9 +23,6 @@ app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "
                 alert("No existe o no se pudo borrar.");
             });
         };
-
-
-
     }]);
 
 app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
@@ -42,6 +38,15 @@ app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http"
             });
 
         };
+        $scope.tiposMovimientosBancarios = [
+            {
+                id: "DEBE",
+                titulo: 'Debe'
+            }, {
+                id: "HABER",
+                titulo: 'Haber'
+            }
+        ];
         $scope.get();
 
         $scope.modificarMovimiento = function() {

@@ -1,4 +1,3 @@
-
 app.controller("EntidadBancariaListaController", ["$location","$scope", "$http", function($location,$scope, $http) {
 
 

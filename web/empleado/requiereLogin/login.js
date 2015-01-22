@@ -13,7 +13,7 @@ app.controller("LoginController", ["$scope", "$rootScope", "$http", "$routeParam
                 window.location.assign("#/");
                 $rootScope.logcheck();
             }).error(function(data, status, headers, config) {
-                alert("Error: " + status);
+                alert("Usuario o contraseña no valida.");
             });
         }
     }]);

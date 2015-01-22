@@ -3,6 +3,7 @@ package com.fpmislata.banco.presentacion.controller;
 import com.fpmislata.banco.dominio.MovimientoBancario;
 import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.dominio.TipoMovimientoBancario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-/**
- *
- * @author JuanPe
- */
 @Controller
 public class MovimientoBancarioController {
 
@@ -126,15 +122,15 @@ public class MovimientoBancarioController {
             MovimientoBancario movimientoBancarioUpdate = (MovimientoBancario) movimientoBancarioDAO.get(idMovimiento);
             
             movimientoBancarioUpdate.setCantidad(movimientoBancario.getCantidad());
-
             movimientoBancarioUpdate.setCuentaDestino(movimientoBancario.getCuentaDestino());
-            
             movimientoBancarioUpdate.setCuentaOrigen(movimientoBancario.getCuentaOrigen());
-            
             movimientoBancarioUpdate.setMotivo(movimientoBancario.getMotivo());
+            
+            if(movimientoBancario.getTipoMovimientoBancario()== TipoMovimientoBancario.DEBE || movimientoBancario.getTipoMovimientoBancario()==TipoMovimientoBancario.HABER){
+                movimientoBancarioUpdate.setTipoMovimientoBancario(movimientoBancario.getTipoMovimientoBancario());
+            }
 
             movimientoBancarioDAO.update(movimientoBancarioUpdate);  
-
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -150,6 +146,5 @@ public class MovimientoBancarioController {
                 throw new RuntimeException(ex);
             }
         }
-
     }
 }

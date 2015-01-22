@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.banco.presentacion.controller;
 
 import com.fpmislata.banco.dominio.Cliente;
@@ -61,7 +57,6 @@ public class ClienteController {
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
-                //Capturamos el error de si da error mostrar el error !!! LOL
             }
         }
     }
@@ -108,7 +103,6 @@ public class ClienteController {
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
-                //Capturamos el error de si da error mostrar el error !!! LOL
             }
         }
     }
@@ -117,14 +111,14 @@ public class ClienteController {
     public void update(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) {
 
         try {
-            //Aqui transformo el json de la cabecera en un objeto java para poder insertarlo en la BBDD
+            //Aqui transforma el json de la cabecera en un objeto java para poder insertarlo en la BBDD
 
             Cliente cliente = (Cliente) jsonConvert.fromJson(json, Cliente.class);
 
-            //Leo la entidad que voy a actualizar y la guardo en un objeto
-            clienteDao.update(cliente);  //Actualizo la entidad
+            //Lee la entidad que hay que actualizar y la guarda en un objeto
+            clienteDao.update(cliente);  //Actualiza la entidad
 
-            //Casteo el objeto creado de nuevo a formato json para poder devolverlo
+            //Castea el objeto creado de nuevo a formato json para poder devolverlo
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             json = jsonConvert.toJson(cliente); //Aqui la variable creada
@@ -136,7 +130,6 @@ public class ClienteController {
             try {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
-                //Capturamos el error de si da error mostrar el error !!! LOL
             }
         }
 

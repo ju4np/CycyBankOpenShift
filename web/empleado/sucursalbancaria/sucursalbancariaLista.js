@@ -12,8 +12,6 @@
 
         $scope.findAll();
 
-
-
         $scope.verCuentasDeSucursalBancaria = function (id) {
             location.href = "#/sucursalbancaria/" + id + "/cuentas";
         };

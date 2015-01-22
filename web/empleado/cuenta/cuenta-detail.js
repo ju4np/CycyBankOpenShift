@@ -10,7 +10,6 @@ app.controller("CuentaDetailDeleteController", ["$scope", "$http", "$routeParams
             }).error(function() {
                 alert("No existe o no se pudo encontrar.");
             });
-
         };
         $scope.buscarCuenta();
 

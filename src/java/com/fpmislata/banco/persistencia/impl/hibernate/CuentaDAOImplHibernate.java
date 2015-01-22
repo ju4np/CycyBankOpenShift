@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
@@ -14,10 +10,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-/**
- *
- * @author alumno
- */
+
 public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Integer> implements CuentaDAO{
             @Override
         public List<Cuenta> getCuentas(Integer idSucursalBancaria){

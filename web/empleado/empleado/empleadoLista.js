@@ -1,8 +1,6 @@
 app.controller("EmpleadoListaController", ["$location","$scope", "$http", function($location,$scope, $http) {
 
-
         $scope.cargarEntidadesBancarias = function() {
-
             $http({
                 method: "GET",
                 url: contextPath + "/api/Empleado"
@@ -11,9 +9,7 @@ app.controller("EmpleadoListaController", ["$location","$scope", "$http", functi
             }).error(function() {
                  $location.url("/loginrequired");
             });
-
         };
-
 
         $scope.cargarEntidadesBancarias();
 

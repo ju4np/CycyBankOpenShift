@@ -5,7 +5,6 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
             $http({
                 method: "GET",
                 url: contextPath + "/api/Cliente/" + $routeParams.id
-
             }).success(function(data, status, headers, config) {
                 $scope.cliente = data; 
             }).error(function(data, status, headers, config) {

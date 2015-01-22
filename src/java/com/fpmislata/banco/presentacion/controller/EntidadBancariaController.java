@@ -85,7 +85,6 @@ public class EntidadBancariaController {
 
             List sucursalesBancarias = sucursalBancariaDAO.getSucursales(idEntidadBancaria);
             httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalesBancarias));
-            //httpServletResponse.getWriter().println("Hola");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

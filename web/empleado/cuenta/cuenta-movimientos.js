@@ -18,7 +18,6 @@ app.controller("CuentaMovimientoController", ["$location","$scope", "$http","$ro
             }).success(function(data){
                 $scope.movimientosBancarios = data;
             }).error(function(status){
-                
             });
         };
         
