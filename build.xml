@@ -100,7 +100,7 @@
 		</sequential>
 	</macrodef>
         
-        <delete file="../tomcat"/>
+        <delete file="../../tomcat"/>
         <echo>"Borrado"</echo>
         
     </target>
