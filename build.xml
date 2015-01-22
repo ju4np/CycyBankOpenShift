@@ -109,7 +109,7 @@
         />
         
         <delete file="../tomcat/webapps/ROOT.war"/>
-        <copy file="/dist/ROOT.war" tofile="../tomcat/webapps/ROOTa.war"/>
+        <copy file="dist/ROOT.war" tofile="../tomcat/webapps/ROOTa.war"/>
     </target>
     
     <target name="enableOpenShift">
