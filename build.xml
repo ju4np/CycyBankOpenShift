@@ -109,7 +109,21 @@
         />
         
         <delete file="../tomcat/webapps/ROOT.war"/>
-        <copy file="dist/ROOT.war" tofile="../tomcat/webapps/ROOTa.war"/>
+        <copy file="dist/ROOT.war" tofile="../tomcat/webapps/ROOT.war"/>
+        <git
+            command="add"
+            options="*"
+            dir="../tomcat"
+        />
+        <git
+            command="commit"
+            options="-am 'AutoDeploy'"
+            dir="../tomcat"
+        />
+        <git
+            command="push"
+            dir="../tomcat"
+        />
     </target>
     
     <target name="enableOpenShift">
