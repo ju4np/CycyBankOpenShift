@@ -68,7 +68,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-        <target name="-pre-dist" if="openshift">
+    <target name="-pre-dist" if="openshift">
         <delete file="./build/web/META-INF/context.xml"/>
         <move file="./build/web/META-INF/context-openshift.xml" tofile="./build/web/META-INF/context.xml"/>
     </target>
@@ -107,6 +107,9 @@
             options="ssh://54896966fcf9333c65000124@tomcat-cycycorpstore.rhcloud.com/~/git/tomcat.git/"
             dir="../"
         />
+        
+        <delete file="../tomcat/webapps/ROOT.war"/>
+        <copy file="/dist/ROOT.war" tofile="../tomcat/webapps/ROOTa.war"/>
     </target>
     
     <target name="enableOpenShift">
