@@ -2,6 +2,7 @@
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
 import com.fpmislata.banco.dominio.MovimientoBancario;
+import com.fpmislata.banco.dominio.TipoMovimientoBancario;
 import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.GenericDAOImplHibernate;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.HibernateUtil;
@@ -33,4 +34,47 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
         }
     }
     
+    public MovimientoBancario insert(MovimientoBancario movimientoBancario){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try{
+            this.updateSaldo(movimientoBancario);
+            
+            session.beginTransaction();
+            session.save(movimientoBancario);
+            session.getTransaction().commit();
+            return movimientoBancario;
+        }catch(Exception ex){
+            if(session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
+            throw new RuntimeException(ex);
+        }
+    }
+  
+    private void updateSaldo(MovimientoBancario movimientoBancario){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try{
+            Query query;
+        
+            if(movimientoBancario.getTipoMovimientoBancario()==TipoMovimientoBancario.DEBE){
+                query = session.createQuery("UPDATE Cuenta cuenta SET cuenta.saldo=cuenta.saldo-? WHERE cuenta.idCuenta=?");
+            } else {
+                query = session.createQuery("UPDATE Cuenta cuenta SET cuenta.saldo=cuenta.saldo+? WHERE cuenta.idCuenta=?");
+            }
+            
+            query.setDouble(0, movimientoBancario.getCantidad());
+            query.setInteger(1, movimientoBancario.getCuentaOrigen());
+            
+            session.beginTransaction();
+            query.executeUpdate();
+            session.getTransaction().commit();
+            
+        
+        }catch(Exception ex){
+            if(session.getTransaction().isActive()){
+                session.getTransaction().rollback();
+            }
+            throw new RuntimeException(ex);
+        }
+    }
 }
