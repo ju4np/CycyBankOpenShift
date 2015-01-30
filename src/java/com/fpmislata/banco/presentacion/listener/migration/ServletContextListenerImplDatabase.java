@@ -20,29 +20,28 @@ public class ServletContextListenerImplDatabase implements ServletContextListene
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-//        try {
+        try {
 //            //Ahora mismo esto no se usa
 //            //Codigo para que funcione el autowired
-//            WebApplicationContext webApplicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContextEvent.getServletContext());
-//            AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory();
-//            autowireCapableBeanFactory.autowireBean(this);
+            WebApplicationContext webApplicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContextEvent.getServletContext());
+            AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory();
+            autowireCapableBeanFactory.autowireBean(this);
 //            
 //            //Ejecutamos los script de sql
-//            initialContext = new InitialContext();
-//            this.dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/MySQLDS");
-//            initialContext.close();
+            initialContext = new InitialContext();
+            this.dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/MySQLDS");
+            initialContext.close();
 //            
-//            Flyway flyway = new Flyway();
-//            flyway.setDataSource(dataSource);
-//            flyway.setLocations("com.fpmislata.banco.persistencia.migration");
-//            flyway.setEncoding("utf-8");
-//            flyway.migrate();
-//            
-//            
-//            System.out.println("*/*/*/*/*/*/*/*/*/ServletContextListener started ");
-//        } catch (Exception ex) {
-//            throw new RuntimeException(ex);
-//        }
+            Flyway flyway = new Flyway();
+            flyway.setDataSource(dataSource);
+            flyway.setLocations("com.fpmislata.banco.persistencia.migration");
+            flyway.setEncoding("utf-8");
+            flyway.migrate();
+           
+            System.out.println("*/*/*/*/*/*/*/*/*/ServletContextListener started ");
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
