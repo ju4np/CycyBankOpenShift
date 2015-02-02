@@ -15,6 +15,8 @@ public class Cuenta {
     Date fechaCreacion;
 
     String sucursalBancaria;
+    
+    int pin;
 
     
 
@@ -57,4 +59,14 @@ public class Cuenta {
     public void setSucursalBancaria(String SucursalBancaria) {
         this.sucursalBancaria = SucursalBancaria;
     }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+    
+    
 }
