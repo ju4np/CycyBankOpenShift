@@ -27,8 +27,9 @@ public class FilterImplSecurity implements Filter {
         HttpSession httpSession = httpServletRequest.getSession(true);
         String URIempleado = httpServletRequest.getContextPath()+"/api/session/empleado";
         String URIcliente = httpServletRequest.getContextPath()+"/api/session/cliente";
+        String URItransaccion = httpServletRequest.getContextPath()+"/api/Transaccion";
 
-        if ((httpSession.getAttribute("idEmpleado") != null) ||(httpServletRequest.getRequestURI().equals(URIempleado))||(httpServletRequest.getRequestURI().equals(URIcliente))) {
+        if ((httpSession.getAttribute("idEmpleado") != null) ||(httpServletRequest.getRequestURI().equals(URIempleado))||(httpServletRequest.getRequestURI().equals(URIcliente))||(httpServletRequest.getRequestURI().equals(URItransaccion))) {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
