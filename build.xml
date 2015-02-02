@@ -104,7 +104,7 @@
 
         <git
             command="clone"
-            options="ssh://54896966fcf9333c65000124@tomcat-cycycorpstore.rhcloud.com/~/git/tomcat.git/"
+            options="ssh://54cf44e24382ec9ce0000222@tomcat-cycycorpstore.rhcloud.com/~/git/tomcat.git/"
             dir="../"
         />
         
