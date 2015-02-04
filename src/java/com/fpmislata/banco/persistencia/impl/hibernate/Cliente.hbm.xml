@@ -7,7 +7,9 @@
 <hibernate-mapping>
 
   <class name="com.fpmislata.banco.dominio.Cliente" table="cliente" > 
-        <id column="idCliente" name="idCliente" type="integer"/> 
+        <id column="idCliente" name="idCliente" type="integer">
+            <generator class="identity"/>
+        </id> 
         
         <property name="usuario" />
         <property name="contrasenya" column="contraseña"/>

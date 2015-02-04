@@ -3,10 +3,11 @@
     <table>
         <thead>
             <tr>
-                <th>idCuenta</th>
-                <th>cliente</th>
-                <th>saldo</th>
-                <th>sucursalBancaria</th>
+                <th>ID Cuenta</th>
+                <th>Cuenta Bancaria</th>
+                <th>Cliente</th>
+                <th>Saldo</th>
+                <th>Sucursal Bancaria</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -15,6 +16,7 @@
         <tbody>
             <tr ng-repeat="cuenta in cuentas">
                 <td>{{cuenta.idCuenta}}</td>
+                <td>{{cuenta.cuentaBancaria | FiltroNumeros:20}}</td>
                 <td>{{cuenta.cliente}}</td>
                 <td>{{cuenta.saldo | currency:"€":2}}</td>
                 <td>{{cuenta.sucursalBancaria}}</td>

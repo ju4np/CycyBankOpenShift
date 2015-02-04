@@ -6,10 +6,12 @@
 
 <hibernate-mapping>
    <class name="com.fpmislata.banco.dominio.SucursalBancaria" table="sucursal" >
-     <id column="idSucursal" name="idSucursal" type="integer"/>
-     <property name="localizacion" />
-     <property name="codigoSucursal" />
-     <property name="entidadBancaria" />
-     <property name="nombreSucursal" />
+        <id column="idSucursal" name="idSucursal" type="integer">
+            <generator class="identity"/>
+        </id>
+        <property name="localizacion" />
+        <property name="codigoSucursal" />
+        <property name="entidadBancaria" />
+        <property name="nombreSucursal" />
    </class>
 </hibernate-mapping>

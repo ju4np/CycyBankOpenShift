@@ -6,8 +6,10 @@
 
 <hibernate-mapping>
 
-  <class name="com.fpmislata.banco.dominio.Empleado" table="empleado" > 
-        <id column="idEmpleado" name="idEmpleado" type="integer"/> 
+    <class name="com.fpmislata.banco.dominio.Empleado" table="empleado" > 
+        <id column="idEmpleado" name="idEmpleado" type="integer">
+            <generator class="identity"/>
+        </id> 
         
         <property name="usuario" />
         <property name="password" column="contraseña"/>

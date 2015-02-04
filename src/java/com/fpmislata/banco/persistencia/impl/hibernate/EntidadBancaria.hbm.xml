@@ -3,7 +3,9 @@
 <hibernate-mapping>
     
   <class name="com.fpmislata.banco.dominio.EntidadBancaria" table="entidadbancaria" >
-    <id column="idEntidadBancaria" name="idEntidadBancaria" type="integer"/>
+        <id column="idEntidadBancaria" name="idEntidadBancaria" type="integer">
+            <generator class="identity"/>
+        </id>
     <property name="nombre" column="nombreEntidad"/>
     <property name="codigoEntidad" />
   </class>

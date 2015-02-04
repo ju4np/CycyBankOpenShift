@@ -33,7 +33,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
             cuenta.setIdCuenta(resultSet.getInt("idCuenta"));
             cuenta.setCliente(resultSet.getString("cliente"));
             cuenta.setSaldo(resultSet.getInt("saldo"));
-            cuenta.setSucursalBancaria(resultSet.getString("sucursalBancaria"));
+            cuenta.setSucursalBancaria(resultSet.getInt("sucursalBancaria"));
 
             return cuenta;
 
@@ -55,7 +55,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
             preparedStatement.setInt(1, cuenta.getIdCuenta());
             preparedStatement.setString(2, cuenta.getCliente());
             preparedStatement.setDouble(3, cuenta.getSaldo());
-            preparedStatement.setString(4, cuenta.getSucursalBancaria());
+            preparedStatement.setInt(4, cuenta.getSucursalBancaria());
 
             preparedStatement.executeUpdate();
 
@@ -77,7 +77,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
             preparedStatement.setInt(4, cuenta.getIdCuenta());
             preparedStatement.setString(1, cuenta.getCliente());
             preparedStatement.setDouble(2, cuenta.getSaldo());
-            preparedStatement.setString(3, cuenta.getSucursalBancaria());
+            preparedStatement.setInt(3, cuenta.getSucursalBancaria());
 
             preparedStatement.executeUpdate();
 
@@ -124,7 +124,7 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
                 cuenta.setIdCuenta(resultSet.getInt("idCuenta"));
                 cuenta.setCliente(resultSet.getString("cliente"));
                 cuenta.setSaldo(resultSet.getInt("saldo"));
-                cuenta.setSucursalBancaria(resultSet.getString("sucursalBancaria"));
+                cuenta.setSucursalBancaria(resultSet.getInt("sucursalBancaria"));
 
                 cuentas.add(cuenta);
             }

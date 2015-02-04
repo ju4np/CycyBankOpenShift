@@ -7,12 +7,15 @@
 <hibernate-mapping>
 
      <class name="com.fpmislata.banco.dominio.Cuenta" table="cuenta" > 
-        <id column="idCuenta" name="idCuenta" type="integer"/> 
+         <id column="idCuenta" name="idCuenta" type="integer">
+            <generator class="identity"/>
+         </id> 
         
         <property name="cliente" />
         <property name="saldo" />
         <property name="fechaCreacion" />       
-        <property name="sucursalBancaria" />       
+        <property name="sucursalBancaria" />
+        <property name="cuentaBancaria"/>    
         
     </class>
   

@@ -14,9 +14,19 @@ public class Cuenta {
 
     Date fechaCreacion;
 
-    String sucursalBancaria;
+    int sucursalBancaria;
     
     int pin;
+    
+    int cuentaBancaria;
+
+    public int getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(int cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
 
     
 
@@ -52,11 +62,11 @@ public class Cuenta {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getSucursalBancaria() {
+    public int getSucursalBancaria() {
         return sucursalBancaria;
     }
 
-    public void setSucursalBancaria(String SucursalBancaria) {
+    public void setSucursalBancaria(int SucursalBancaria) {
         this.sucursalBancaria = SucursalBancaria;
     }
 
