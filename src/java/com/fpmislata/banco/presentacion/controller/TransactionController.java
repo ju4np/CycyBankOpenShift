@@ -1,5 +1,6 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.dominio.MovimientoBancario;
@@ -31,31 +32,39 @@ public class TransactionController {
     CuentaDAO cuentaDAO;
 
     @RequestMapping(value = {"/Transaccion"}, method = RequestMethod.POST)
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-        Transaccion transaccion = (Transaccion) jsonConvert.fromJson(jsonEntrada, Transaccion.class);
-        Cuenta cuentaDestino = cuentaDAO.get(transaccion.getCuentaDestino());
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws BussinessException, IOException {
 
-        if (transaccion.getPin() == cuentaDestino.getPin()) {
-            MovimientoBancario movimientoBancario = new MovimientoBancario();
-            movimientoBancario.setCuentaOrigen(transaccion.getCuentaOrigen());
-            movimientoBancario.setCuentaDestino(transaccion.getCuentaDestino());
-            movimientoBancario.setCantidad(transaccion.getCantidad());
-            movimientoBancario.setMotivo(transaccion.getConcepto());
-            movimientoBancario.setTipoMovimientoBancario(TipoMovimientoBancario.DEBE);
+            Transaccion transaccion = (Transaccion) jsonConvert.fromJson(jsonEntrada, Transaccion.class);
 
-            movimientoBancario = movimientoBancarioDAO.insert(movimientoBancario);
-
-            MovimientoBancario movimientoBancarioHaber = new MovimientoBancario();
-            movimientoBancarioHaber.setCuentaDestino(transaccion.getCuentaOrigen());
-            movimientoBancarioHaber.setCuentaOrigen(transaccion.getCuentaDestino());
-            movimientoBancarioHaber.setCantidad(transaccion.getCantidad());
-            movimientoBancarioHaber.setTipoMovimientoBancario(TipoMovimientoBancario.HABER);
-            movimientoBancarioHaber.setMotivo(transaccion.getConcepto());
-            System.out.println(jsonConvert.toJson(movimientoBancarioHaber));
-            System.out.println(jsonConvert.toJson(movimientoBancario));
+            Cuenta cuentaOrigen = cuentaDAO.getCuentaByCuentaBancaria(transaccion.getCuentaOrigen());
+            Cuenta cuentaDestino = cuentaDAO.getCuentaByCuentaBancaria(transaccion.getCuentaDestino());
             
-            movimientoBancarioDAO.insert(movimientoBancarioHaber);
-
-        }
+            if((cuentaOrigen!=null)&&(cuentaDestino!=null)){
+                if(cuentaDestino.getPin() == transaccion.getPin()){
+                    MovimientoBancario movimientoBancarioDebe = new MovimientoBancario();
+                    movimientoBancarioDebe.setCuentaOrigen(cuentaOrigen.getIdCuenta());
+                    movimientoBancarioDebe.setCuentaDestino(cuentaDestino.getIdCuenta());
+                    movimientoBancarioDebe.setCantidad(transaccion.getCantidad());
+                    movimientoBancarioDebe.setMotivo(transaccion.getConcepto());
+                    movimientoBancarioDebe.setTipoMovimientoBancario(TipoMovimientoBancario.DEBE);
+                    
+                    movimientoBancarioDAO.insert(movimientoBancarioDebe);
+                    
+                    MovimientoBancario movimientoBancarioHaber = new MovimientoBancario();
+                    movimientoBancarioHaber.setCuentaOrigen(cuentaDestino.getIdCuenta());
+                    movimientoBancarioHaber.setCuentaDestino(cuentaOrigen.getIdCuenta());
+                    movimientoBancarioHaber.setCantidad(transaccion.getCantidad());
+                    movimientoBancarioHaber.setMotivo(transaccion.getConcepto());
+                    movimientoBancarioHaber.setTipoMovimientoBancario(TipoMovimientoBancario.HABER);
+                    
+                    movimientoBancarioDAO.insert(movimientoBancarioHaber);
+                } else{
+                    httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    httpServletResponse.getWriter().println("Error 401: No Autorizado, PIN Incorrecto. ");
+                }
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                httpServletResponse.getWriter().println("Error 400: No Encontrado, Cuenta Origen o Destino incorrectas. ");
+            }
     }
 }

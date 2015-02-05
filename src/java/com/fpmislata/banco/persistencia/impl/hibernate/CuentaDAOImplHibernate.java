@@ -59,4 +59,21 @@ public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Inte
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public Cuenta getCuentaByCuentaBancaria(Integer cuentaBancaria) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        
+        try{
+            Query query = session.createQuery("SELECT cuenta FROM Cuenta cuenta WHERE cuentaBancaria=?");
+            query.setInteger(0, cuentaBancaria);
+            
+            Cuenta cuenta = (Cuenta)query.uniqueResult();
+            
+            return cuenta;
+            
+        }catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
 }

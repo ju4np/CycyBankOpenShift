@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface CuentaDAO  extends GenericDAO<Cuenta,Integer>{
     public List<Cuenta> getCuentas(Integer idSucursalBancaria);
+    public Cuenta getCuentaByCuentaBancaria(Integer cuentaBancaria);
 }
