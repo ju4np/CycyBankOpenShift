@@ -68,48 +68,43 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+     <taskdef resource="es/logongas/openshift/ant/antlib.xml" />
+    
+    
     <target name="-pre-dist" if="openshift">
         <delete file="./build/web/META-INF/context.xml"/>
         <move file="./build/web/META-INF/context-openshift.xml" tofile="./build/web/META-INF/context.xml"/>
     </target>
     
     <target name="-post-dist" if="openshift" >
-        
-        <move file="./dist/cycycorp.war" tofile="./dist/ROOT.war"/>
+        <move file="./dist/CyCyBank.war" tofile="./dist/ROOT.war"/>
     </target>
     
     <target name="desplegarOpenShift" depends="enableOpenShift,dist">
+        
+       
+        
         <!-- git clone 
         //copiar root.war al repo clonado
         //git commit
         //git push -->
         
-        <macrodef name="git">
-		<attribute name="command" />
-		<attribute name="options" default="" />
-		<attribute name="dir" default="" />
-		<attribute name="failerror" default="false" />
-		<element name="args" optional="true" />
-		<sequential>
-			<echo message="git dir @{dir}" />
-			<echo message="git @{command}" />
-			<exec executable="git" dir="@{dir}" failonerror="@{failerror}">
-				<arg line="@{command} @{options}" />
-				<args />
-			</exec>
-		</sequential>
-	</macrodef>
         
         <delete dir="../tomcat"/>
 
-        <git
-            command="clone"
-            options="ssh://54cf44e24382ec9ce0000222@tomcat-cycycorpstore.rhcloud.com/~/git/tomcat.git/"
-            dir="../"
+        <gitcloneapplication
+            userName="ivanrbalumno@gmail.com"
+            password="alumna123"
+            domainName="tomcat"
+            applicationName="cycycorpstore" 
+            privateKeyFile="ssh/id_rsa"
+            path="../tomcat"
         />
         
         <delete file="../tomcat/webapps/ROOT.war"/>
         <copy file="dist/ROOT.war" tofile="../tomcat/webapps/ROOT.war"/>
+        
         <git
             command="add"
             options="*"
@@ -120,9 +115,13 @@
             options="-am 'AutoDeploy'"
             dir="../tomcat"
         />
-        <git
-            command="push"
-            dir="../tomcat"
+        <gitpushapplication
+            userName="ivanrbalumno@gmail.com"
+            password="alumna123"
+            domainName="tomcat"
+            applicationName="cycycorpstore" 
+            privateKeyFile="ssh/id_rsa"
+            path="../tomcat"
         />
     </target>
     
