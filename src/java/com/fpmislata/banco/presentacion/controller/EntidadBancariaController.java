@@ -1,5 +1,6 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.EntidadBancaria;
 import com.fpmislata.banco.persistencia.EntidadBancariaDAO;
@@ -37,6 +38,13 @@ public class EntidadBancariaController {
                 httpServletResponse.setStatus(200);
                 httpServletResponse.getWriter().println(jsonConvert.toJson(entidadBancaria));
             }
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -44,29 +52,50 @@ public class EntidadBancariaController {
 
     @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
-        entidadBancariaDAO.delete(idEntidadBancaria);
-        httpServletResponse.setStatus(204);
+        try {
+            entidadBancariaDAO.delete(idEntidadBancaria);
+            httpServletResponse.setStatus(204);
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
 
     }
 
     @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        entidadBancariaDAO.insert((EntidadBancaria)jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
+        try {
+            entidadBancariaDAO.insert((EntidadBancaria) jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
 //        httpServletResponse.setStatus(204);
-
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 
     @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        entidadBancariaDAO.update((EntidadBancaria)jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
+        try {
+            entidadBancariaDAO.update((EntidadBancaria) jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
 //        httpServletResponse.setStatus(204);
-
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
     }
-    
 
-    
     @RequestMapping(value = {"/EntidadBancaria"})
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -74,13 +103,20 @@ public class EntidadBancariaController {
             List entidadesBancarias = entidadBancariaDAO.findAll();
             httpServletResponse.getWriter().println(jsonConvert.toJson(entidadesBancarias));
 
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
-    
+
     @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}/Sucursales"})
-    public void getSucursalesByIdEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    public void getSucursalesByIdEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
         try {
 
             List sucursalesBancarias = sucursalBancariaDAO.getSucursales(idEntidadBancaria);

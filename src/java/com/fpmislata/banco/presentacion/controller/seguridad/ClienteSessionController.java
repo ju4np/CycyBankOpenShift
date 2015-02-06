@@ -1,5 +1,6 @@
 package com.fpmislata.banco.presentacion.controller.seguridad;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Cliente;
 import com.fpmislata.banco.dominio.seguridad.Credencial;
@@ -54,7 +55,7 @@ public class ClienteSessionController {
 
     @RequestMapping(value = {"/session/cliente"}, method = RequestMethod.GET)
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
-
+        try{
         HttpSession httpSession = httpServletRequest.getSession(true);
         Integer idCliente = (Integer) httpSession.getAttribute("idCliente");
         
@@ -69,6 +70,14 @@ public class ClienteSessionController {
             
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }
+        }catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         }
     }
 }

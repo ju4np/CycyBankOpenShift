@@ -1,5 +1,6 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.dominio.MovimientoBancario;
@@ -39,6 +40,13 @@ public class CuentaController {
             String json = jsonConvert.toJson(cuenta);
             httpServletResponse.getWriter().println(json);
 
+        }catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -56,6 +64,13 @@ public class CuentaController {
         try {
             cuentaDAO.delete(idCuenta);
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

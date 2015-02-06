@@ -1,5 +1,6 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.Empleado;
 import com.fpmislata.banco.persistencia.EmpleadoDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
@@ -34,6 +35,13 @@ public class EmpleadoController {
                 httpServletResponse.setStatus(200);
                 httpServletResponse.getWriter().println(jsonConvert.toJson(empleado));
             }
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -41,24 +49,48 @@ public class EmpleadoController {
 
     @RequestMapping(value = {"/Empleado/{idEmpleado}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEmpleado") int idEmpleado) {
-        empleadoDAO.delete(idEmpleado);
-        httpServletResponse.setStatus(204);
+        try {
+            empleadoDAO.delete(idEmpleado);
+            httpServletResponse.setStatus(204);
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
 
     }
 
     @RequestMapping(value = {"/Empleado"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        empleadoDAO.insert((Empleado)jsonConvert.fromJson(jsonEntrada, Empleado.class));
-
+        try {
+            empleadoDAO.insert((Empleado) jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 
     @RequestMapping(value = {"/Empleado"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-        empleadoDAO.update((Empleado)jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        try {
+            empleadoDAO.update((Empleado) jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
     }
 
-    
     @RequestMapping(value = {"/Empleado"})
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -66,6 +98,13 @@ public class EmpleadoController {
             List empleados = empleadoDAO.findAll();
             httpServletResponse.getWriter().println(jsonConvert.toJson(empleados));
 
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

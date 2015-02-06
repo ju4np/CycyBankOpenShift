@@ -16,5 +16,14 @@ class BussinessMessage {
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString() {
+        
+        String json = "{'fieldName':'"+this.fieldName+"', 'message':'"+this.message+"'}"; 
+        return json;
+    }
+    
+    
     
 }

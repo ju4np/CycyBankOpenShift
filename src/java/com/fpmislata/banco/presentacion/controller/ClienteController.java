@@ -1,9 +1,9 @@
-
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
+import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Cliente;
 import com.fpmislata.banco.persistencia.ClienteDAO;
-import com.fpmislata.banco.common.json.JsonConvert;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 @Controller
 public class ClienteController {
@@ -31,12 +30,15 @@ public class ClienteController {
         try {
 
             Cliente cliente = clienteDao.get(idCliente); //creo variable para pasarla abajo
+
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             String json = jsonConvert.toJson(cliente);
 
             httpServletResponse.getWriter().println(json);
 
+        } catch (BussinessException bussinessException) {
+            httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -73,6 +75,8 @@ public class ClienteController {
             String json = jsonConvert.toJson(clientes);
             httpServletResponse.getWriter().println(json);
 
+        } catch (BussinessException bussinessException) {
+            httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -84,7 +88,7 @@ public class ClienteController {
     }
 
     @RequestMapping(value = {"/Cliente"}, method = RequestMethod.POST)
-    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) {
+    public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String json) throws IOException {
 
         try {
 
@@ -97,13 +101,17 @@ public class ClienteController {
             json = jsonConvert.toJson(cliente);
             httpServletResponse.getWriter().println(json);
 
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            try {
-                ex.printStackTrace(httpServletResponse.getWriter());
-            } catch (IOException ex1) {
-            }
+
         }
     }
 
@@ -124,6 +132,13 @@ public class ClienteController {
             json = jsonConvert.toJson(cliente); //Aqui la variable creada
             httpServletResponse.getWriter().println(json);
 
+        } catch (BussinessException bussinessException) {
+            try {
+                httpServletResponse.getWriter().println(bussinessException.getBussinessMessages().toString());
+            } catch (IOException ex) {
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

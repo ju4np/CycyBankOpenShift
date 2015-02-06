@@ -2,6 +2,7 @@
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.persistencia.CuentaDAO;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.GenericDAOImplHibernate;
@@ -19,7 +20,9 @@ public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Inte
             Query query = session.createQuery("SELECT cuenta FROM Cuenta cuenta WHERE sucursalbancaria=?");
             query.setInteger(0, idSucursalBancaria);
             List<Cuenta> sucursalBancarias = query.list();
-            
+            if(sucursalBancarias.size()==0){
+                throw new BussinessException("404","No encontradas.");
+            }
             return sucursalBancarias; 
         } catch(Exception ex){
             if(session.getTransaction().isActive()){
@@ -69,7 +72,9 @@ public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Inte
             query.setInteger(0, cuentaBancaria);
             
             Cuenta cuenta = (Cuenta)query.uniqueResult();
-            
+            if(cuenta==null){
+                throw new BussinessException("404", "Cuenta No encontrada.");
+            }
             return cuenta;
             
         }catch(Exception ex){
