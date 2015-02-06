@@ -78,7 +78,7 @@
     </target>
     
     <target name="-post-dist" if="openshift" >
-        <move file="./dist/CyCyBank.war" tofile="./dist/ROOT.war"/>
+        <move file="./dist/CycyBank.war" tofile="./dist/ROOT.war"/>
     </target>
     
     <target name="desplegarOpenShift" depends="enableOpenShift,dist">
