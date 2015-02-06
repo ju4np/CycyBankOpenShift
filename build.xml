@@ -69,7 +69,7 @@
 
     -->
     
-     <taskdef resource="es/logongas/openshift/ant/antlib.xml" />
+    <taskdef resource="es/logongas/openshift/ant/antlib.xml" />
     
     
     <target name="-pre-dist" if="openshift">
@@ -94,10 +94,10 @@
         <delete dir="../tomcat"/>
 
         <gitcloneapplication
-            userName="ivanrbalumno@gmail.com"
-            password="alumna123"
-            domainName="tomcat"
-            applicationName="cycycorpstore" 
+            userName="crazycryzocorp@gmail.com"
+            password="cycycorp"
+            domainName="cycycorpstore"
+            applicationName="tomcat" 
             privateKeyFile="ssh/id_rsa"
             path="../tomcat"
         />
@@ -116,10 +116,10 @@
             dir="../tomcat"
         />
         <gitpushapplication
-            userName="ivanrbalumno@gmail.com"
-            password="alumna123"
-            domainName="tomcat"
-            applicationName="cycycorpstore" 
+            userName="crazycryzocorp@gmail.com"
+            password="cycycorp"
+            domainName="cycycorpstore"
+            applicationName="tomcat" 
             privateKeyFile="ssh/id_rsa"
             path="../tomcat"
         />
