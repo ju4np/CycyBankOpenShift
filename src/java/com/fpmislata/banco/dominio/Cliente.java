@@ -1,11 +1,9 @@
-
-
 package com.fpmislata.banco.dominio;
 
 import java.util.Date;
 
-
 public class Cliente {
+
     int idCliente;
     String usuario;
     String contrasenya;
@@ -21,8 +19,39 @@ public class Cliente {
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
     }
-    public Cliente(){
-        
+
+    public Cliente() {
+
+    }
+
+    private boolean ValidarDni(String dni) {
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int valor;
+        boolean isCorrect;
+
+        if (this.dni.startsWith("X")) {
+
+            valor = Integer.parseInt(this.dni.substring(1, this.dni.length() - 1));
+        } else if (this.dni.startsWith("Y")) {
+
+            valor = 10000000 + Integer.parseInt(this.dni.substring(1, this.dni.length() - 1));
+        } else if (this.dni.startsWith("Z")) {
+
+            valor = 20000000 + Integer.parseInt(this.dni.substring(1, this.dni.length() - 1));
+        } else {
+
+            valor = Integer.parseInt(this.dni.substring(0, this.dni.length() - 1));
+        }
+
+        String letraCorrecta = "" + letras.charAt(valor % 23);
+
+        if (this.dni.endsWith(letraCorrecta) == true) {
+            isCorrect = true;
+        } else {
+            isCorrect = false;
+        }
+        return isCorrect;
+
     }
 
     public int getIdCliente() {
@@ -72,6 +101,5 @@ public class Cliente {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    
+
 }
