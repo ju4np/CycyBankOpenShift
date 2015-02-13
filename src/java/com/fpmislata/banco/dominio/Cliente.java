@@ -31,8 +31,9 @@ public class Cliente {
     public Cliente() {
 
     }
-
-    private boolean ValidarDni(String dni) {
+    
+    @AssertTrue(message="La letra del DNI no es correcta o valida prueba de nuevo")
+    private boolean isValidoDNI() {
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         int valor;
         
