@@ -39,7 +39,7 @@ public class TransactionController {
             Cuenta cuentaOrigen = cuentaDAO.getCuentaByCuentaBancaria(transaccion.getCuentaOrigen());
             Cuenta cuentaDestino = cuentaDAO.getCuentaByCuentaBancaria(transaccion.getCuentaDestino());
             
-            if((cuentaOrigen!=null)&&(cuentaDestino!=null)){
+            if(cuentaDestino!=null){
                 if(cuentaDestino.getPin() == transaccion.getPin()){
                     MovimientoBancario movimientoBancarioDebe = new MovimientoBancario();
                     movimientoBancarioDebe.setCuentaOrigen(cuentaOrigen.getIdCuenta());

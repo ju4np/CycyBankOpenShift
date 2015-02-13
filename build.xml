@@ -83,7 +83,7 @@
 
         <gitcloneapplication
             userName="crazycryzocorp@gmail.com"
-            password="cycycorp"
+            password="${passwd}"
             domainName="cycycorpstore"
             applicationName="tomcat" 
             privateKeyFile="ssh/id_rsa"
@@ -105,7 +105,7 @@
         />
         <gitpushapplication
             userName="crazycryzocorp@gmail.com"
-            password="cycycorp"
+            password="${passwd}"
             domainName="cycycorpstore"
             applicationName="tomcat" 
             privateKeyFile="ssh/id_rsa"

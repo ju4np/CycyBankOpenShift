@@ -1,6 +1,7 @@
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.SucursalBancaria;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.GenericDAOImplHibernate;
@@ -12,14 +13,16 @@ import org.hibernate.Session;
 public class SucursalBancariaDAOImplHibernate extends GenericDAOImplHibernate<SucursalBancaria, Integer> implements SucursalBancariaDAO{
     
     @Override
-    public List<SucursalBancaria> getSucursales(Integer idEntidadBancaria){
+    public List<SucursalBancaria> getSucursales(Integer idEntidadBancaria) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             Query query = session.createQuery("SELECT sucursalBancaria FROM SucursalBancaria sucursalBancaria WHERE entidadBancaria=?");
             query.setInteger(0, idEntidadBancaria);
             List<SucursalBancaria> sucursalBancarias = query.list();
-            
-            return sucursalBancarias; 
+            if(sucursalBancarias.size()==0){
+                throw new BussinessException("404","Sucursales Bancarias No encontradas");
+            }            
+            return sucursalBancarias;
         } catch(Exception ex){
             if(session.getTransaction().isActive()){
                 session.getTransaction().rollback();

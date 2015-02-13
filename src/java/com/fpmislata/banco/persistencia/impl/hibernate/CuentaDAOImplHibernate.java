@@ -14,7 +14,7 @@ import org.hibernate.Session;
 
 public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Integer> implements CuentaDAO{
     @Override
-    public List<Cuenta> getCuentas(Integer idSucursalBancaria){
+    public List<Cuenta> getCuentas(Integer idSucursalBancaria) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             Query query = session.createQuery("SELECT cuenta FROM Cuenta cuenta WHERE sucursalbancaria=?");
@@ -35,17 +35,24 @@ public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Inte
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             Query query = session.createQuery("SELECT MAX(cuenta.cuentaBancaria) FROM Cuenta cuenta");
-            int cuentaBancaria;
+            String cuentaBancaria;
             if(query.uniqueResult()==null){
-                cuentaBancaria=0;
+                cuentaBancaria="";
             } else {
-                cuentaBancaria = (int)query.uniqueResult();
+                cuentaBancaria = (String)query.uniqueResult();
             }
             
-            if(cuentaBancaria==0){
-                cuentaBancaria=1;
+            if(cuentaBancaria==""){
+                cuentaBancaria="000000000000000000000001";
             } else{
-                cuentaBancaria = cuentaBancaria+1;
+                int valor = Integer.parseInt(cuentaBancaria)+1;
+                String numeroCuenta = ""+valor;
+                
+                while(numeroCuenta.length()<24){
+                    numeroCuenta = "0"+numeroCuenta;        
+                }
+                cuentaBancaria=numeroCuenta;
+                
             }
             
             cuenta.setCuentaBancaria(cuentaBancaria);
@@ -64,7 +71,7 @@ public class CuentaDAOImplHibernate extends GenericDAOImplHibernate<Cuenta, Inte
     }
 
     @Override
-    public Cuenta getCuentaByCuentaBancaria(Integer cuentaBancaria) {
+    public Cuenta getCuentaByCuentaBancaria(Integer cuentaBancaria) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         
         try{

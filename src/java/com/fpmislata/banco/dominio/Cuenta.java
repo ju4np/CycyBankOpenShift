@@ -18,17 +18,16 @@ public class Cuenta {
     
     int pin;
     
-    int cuentaBancaria;
+    String cuentaBancaria;
 
-    public int getCuentaBancaria() {
+    public String getCuentaBancaria() {
         return cuentaBancaria;
     }
 
-    public void setCuentaBancaria(int cuentaBancaria) {
+    public void setCuentaBancaria(String cuentaBancaria) {
         this.cuentaBancaria = cuentaBancaria;
     }
 
-    
 
     public int getIdCuenta() {
         return idCuenta;

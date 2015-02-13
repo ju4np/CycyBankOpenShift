@@ -1,5 +1,6 @@
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.Empleado;
 import com.fpmislata.banco.persistencia.EmpleadoDAO;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.GenericDAOImplHibernate;
@@ -12,7 +13,7 @@ import org.hibernate.SessionFactory;
 
 public class EmpleadoDAOImplHibernate extends GenericDAOImplHibernate<Empleado,Integer> implements EmpleadoDAO{
     @Override
-    public Empleado getByUsuario(String usuario){
+    public Empleado getByUsuario(String usuario) throws BussinessException {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.getCurrentSession();
         
@@ -23,7 +24,7 @@ public class EmpleadoDAOImplHibernate extends GenericDAOImplHibernate<Empleado,I
         if(!lista.isEmpty()){
             empleado = lista.get(0);
         } else {
-            empleado = null;
+            throw new BussinessException("404", "Empleado No Encontrado.");
         }
         
         return empleado;

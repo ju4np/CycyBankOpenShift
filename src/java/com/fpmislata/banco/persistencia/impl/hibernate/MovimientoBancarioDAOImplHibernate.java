@@ -1,6 +1,7 @@
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.MovimientoBancario;
 import com.fpmislata.banco.dominio.TipoMovimientoBancario;
 import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
@@ -14,7 +15,7 @@ import org.hibernate.Session;
 public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario, Integer> implements MovimientoBancarioDAO{
 
     @Override
-    public List<MovimientoBancario> getMovimientos(Integer idCuenta) {
+    public List<MovimientoBancario> getMovimientos(Integer idCuenta) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         try{
@@ -24,6 +25,9 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
             query.setInteger(1, idCuenta);
             
             List<MovimientoBancario> lista = query.list();
+            if(lista.size()==0){
+                throw new BussinessException("404", "Movimiento No encontrado");
+            }
             return lista;
             
         }catch(Exception ex){

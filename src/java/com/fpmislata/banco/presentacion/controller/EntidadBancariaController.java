@@ -121,9 +121,16 @@ public class EntidadBancariaController {
 
             List sucursalesBancarias = sucursalBancariaDAO.getSucursales(idEntidadBancaria);
             httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalesBancarias));
+        } catch(BussinessException bussinessException){
+            try{
+                httpServletResponse.getWriter().print(bussinessException.getBussinessMessages());
+            } catch(IOException ex){
+                httpServletResponse.setContentType("text/plain; charset=UTF-8");
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
-        }
+        } 
     }
 
 }

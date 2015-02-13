@@ -152,7 +152,7 @@ public class CuentaController {
     }
     
     @RequestMapping(value = {"/cuenta/{idCuenta}/movimientos"})
-    public void getMovimientosByIdCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idCuenta") int idCuenta) {
+    public void getMovimientosByIdCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idCuenta") int idCuenta) throws BussinessException {
         try{
             List<MovimientoBancario> lista = movimientoBancarioDAO.getMovimientos(idCuenta);
             httpServletResponse.getWriter().print(jsonConvert.toJson(lista));
@@ -162,7 +162,7 @@ public class CuentaController {
     }
     
     @RequestMapping(value = {"/SucursalBancaria/{idSucursalBancaria}/Cuentas"})
-    public void getCuentasBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idSucursalBancaria") int idSucursalBancaria) {
+    public void getCuentasBySucursal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idSucursalBancaria") int idSucursalBancaria) throws BussinessException {
         try {
             List cuentas =  cuentaDAO.getCuentas(idSucursalBancaria);
             httpServletResponse.getWriter().println(jsonConvert.toJson(cuentas));
