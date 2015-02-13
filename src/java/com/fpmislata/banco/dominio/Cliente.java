@@ -1,14 +1,22 @@
 package com.fpmislata.banco.dominio;
 
 import java.util.Date;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 public class Cliente {
 
     int idCliente;
+    @NotNull
     String usuario;
+    @NotNull
     String contrasenya;
+    @NotNull
     String nombre;
+
     String dni;
+    @Past
     Date fechaNacimiento;
 
     public Cliente(int idCliente, String usuario, String contrasenya, String nombre, String dni, Date fechaNacimiento) {
@@ -27,6 +35,7 @@ public class Cliente {
     private boolean ValidarDni(String dni) {
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         int valor;
+        
         boolean isCorrect;
 
         if (this.dni.startsWith("X")) {
