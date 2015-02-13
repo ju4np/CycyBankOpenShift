@@ -15,7 +15,9 @@
         <property name="saldo" />
         <property name="fechaCreacion" />       
         <property name="sucursalBancaria" />
-        <property name="cuentaBancaria"/>    
+        <property name="pin"/>    
+        <property name="cuentaBancaria"/>
+
         
     </class>
   
