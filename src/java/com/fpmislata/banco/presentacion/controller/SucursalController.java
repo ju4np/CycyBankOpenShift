@@ -1,6 +1,7 @@
 
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.SucursalBancaria;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
@@ -42,9 +43,9 @@ public class SucursalController {
     //Metodo get
     @RequestMapping(value = {"/SucursalBancaria/{id}"},method = RequestMethod.GET)
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int idSucursal) throws IOException {
+            SucursalBancaria sucursalBancaria= sucursalDAO.get(idSucursal);
+            httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));        
 
-        SucursalBancaria sucursalBancaria= sucursalDAO.get(idSucursal);
-        httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));
     }
     
     //Metodo findAll

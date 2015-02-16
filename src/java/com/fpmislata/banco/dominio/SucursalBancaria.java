@@ -1,10 +1,19 @@
 
 package com.fpmislata.banco.dominio;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class SucursalBancaria {
     //Aributos
     int idSucursal;
-    String localizacion,codigoSucursal,entidadBancaria,nombreSucursal;
+    @NotBlank
+    String localizacion;
+    @NotBlank
+    String codigoSucursal;
+    @NotBlank
+    String entidadBancaria;
+    @NotBlank
+    String nombreSucursal;
     
     //Constructor vacio
     public SucursalBancaria(){}

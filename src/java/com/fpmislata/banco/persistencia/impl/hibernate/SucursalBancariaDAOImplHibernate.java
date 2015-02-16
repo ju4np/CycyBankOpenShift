@@ -1,6 +1,7 @@
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.SucursalBancaria;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import com.fpmislata.banco.persistencia.impl.hibernate.commons.GenericDAOImplHibernate;
@@ -24,8 +25,8 @@ public class SucursalBancariaDAOImplHibernate extends GenericDAOImplHibernate<Su
             if(session.getTransaction().isActive()){
                 session.getTransaction().rollback();
             }
-            throw new RuntimeException(ex);
-        }
+            throw new BussinessException(ex); 
     }
     
+}
 }
