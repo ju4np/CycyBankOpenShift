@@ -32,30 +32,33 @@ public class TransactionController {
 
     @RequestMapping(value = {"/Transaccion"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-        Transaccion transaccion = (Transaccion) jsonConvert.fromJson(jsonEntrada, Transaccion.class);
-        Cuenta cuentaDestino = cuentaDAO.get(transaccion.getCuentaDestino());
+        try{
+            Transaccion transaccion = (Transaccion) jsonConvert.fromJson(jsonEntrada, Transaccion.class);
+            Cuenta cuentaDestino = cuentaDAO.get(transaccion.getCuentaDestino());
 
-        if (transaccion.getPin() == cuentaDestino.getPin()) {
-            MovimientoBancario movimientoBancario = new MovimientoBancario();
-            movimientoBancario.setCuentaOrigen(transaccion.getCuentaOrigen());
-            movimientoBancario.setCuentaDestino(transaccion.getCuentaDestino());
-            movimientoBancario.setCantidad(transaccion.getCantidad());
-            movimientoBancario.setMotivo(transaccion.getConcepto());
-            movimientoBancario.setTipoMovimientoBancario(TipoMovimientoBancario.DEBE);
+            if (transaccion.getPin() == cuentaDestino.getPin()) {
+                MovimientoBancario movimientoBancario = new MovimientoBancario();
+                movimientoBancario.setCuentaOrigen(transaccion.getCuentaOrigen());
+                movimientoBancario.setCuentaDestino(transaccion.getCuentaDestino());
+                movimientoBancario.setCantidad(transaccion.getCantidad());
+                movimientoBancario.setMotivo(transaccion.getConcepto());
+                movimientoBancario.setTipoMovimientoBancario(TipoMovimientoBancario.DEBE);
 
-            movimientoBancario = movimientoBancarioDAO.insert(movimientoBancario);
+                movimientoBancario = movimientoBancarioDAO.insert(movimientoBancario);
 
-            MovimientoBancario movimientoBancarioHaber = new MovimientoBancario();
-            movimientoBancarioHaber.setCuentaDestino(transaccion.getCuentaOrigen());
-            movimientoBancarioHaber.setCuentaOrigen(transaccion.getCuentaDestino());
-            movimientoBancarioHaber.setCantidad(transaccion.getCantidad());
-            movimientoBancarioHaber.setTipoMovimientoBancario(TipoMovimientoBancario.HABER);
-            movimientoBancarioHaber.setMotivo(transaccion.getConcepto());
-            System.out.println(jsonConvert.toJson(movimientoBancarioHaber));
-            System.out.println(jsonConvert.toJson(movimientoBancario));
+                MovimientoBancario movimientoBancarioHaber = new MovimientoBancario();
+                movimientoBancarioHaber.setCuentaDestino(transaccion.getCuentaOrigen());
+                movimientoBancarioHaber.setCuentaOrigen(transaccion.getCuentaDestino());
+                movimientoBancarioHaber.setCantidad(transaccion.getCantidad());
+                movimientoBancarioHaber.setTipoMovimientoBancario(TipoMovimientoBancario.HABER);
+                movimientoBancarioHaber.setMotivo(transaccion.getConcepto());
+                System.out.println(jsonConvert.toJson(movimientoBancarioHaber));
+                System.out.println(jsonConvert.toJson(movimientoBancario));
             
-            movimientoBancarioDAO.insert(movimientoBancarioHaber);
+                movimientoBancarioDAO.insert(movimientoBancarioHaber);
 
+        }catch(Exception ex){
+                httpServletResponse.getWriter().println(jsonEntrada);
         }
     }
 }
