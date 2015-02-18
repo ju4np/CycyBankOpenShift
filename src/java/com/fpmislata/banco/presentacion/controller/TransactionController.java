@@ -33,7 +33,7 @@ public class TransactionController {
 
     @RequestMapping(value = {"/Transaccion"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws BussinessException, IOException {
-
+        try{
             Transaccion transaccion = (Transaccion) jsonConvert.fromJson(jsonEntrada, Transaccion.class);
 
             Cuenta cuentaOrigen = cuentaDAO.getCuentaByCuentaBancaria(transaccion.getCuentaOrigen());
@@ -66,5 +66,8 @@ public class TransactionController {
                 httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 httpServletResponse.getWriter().println("Error 400: No Encontrado, Cuenta Origen o Destino incorrectas. ");
             }
+        }catch(Exception ex){
+            httpServletResponse.getWriter().println(jsonEntrada);
+        }
     }
 }
