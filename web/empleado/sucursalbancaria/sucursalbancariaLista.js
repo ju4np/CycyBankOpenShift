@@ -5,8 +5,13 @@
                 url: contextPath + "/api/SucursalBancaria"
             }).success(function (data) {
                 $scope.sucursalesBancarias = data;
-                }).error(function () {
-                $location.url("/loginrequired");
+            }).error(function (data, status) {
+                if (status === 406) {
+                    $scope.errores = data;
+                    $scope.mostrarErrores = true;
+                } else {
+                    $location.url("/loginrequired");
+                }
             });
         };
 

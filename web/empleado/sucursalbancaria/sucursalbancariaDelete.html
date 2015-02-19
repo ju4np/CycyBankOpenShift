@@ -12,3 +12,7 @@
     <input type="text" ng-model="sucursalBancaria.nombreSucursal" ng-disabled="true"/><br/>
     <button ng-click="deleteSucursal(sucursalBancaria.idSucursal)" ng-show="true">Borrar Registro</button>
 </div>
+    <div ng-show="mostrarErrores">
+    <h3>Se han producido los siguientes errores:</h3>   
+    <p ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
+</div>

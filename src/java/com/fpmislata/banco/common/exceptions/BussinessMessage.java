@@ -1,6 +1,6 @@
 package com.fpmislata.banco.common.exceptions;
 
-class BussinessMessage {
+public class BussinessMessage {
     private final String fieldName;
     private final String message;
 

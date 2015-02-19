@@ -1,7 +1,7 @@
 <div id="contenedor">
     <h2>Sucursal Bancaria</h2>
-    <span ng-show="action==='update'||action==='delete'" class="col-sm-4">Id Sucursal: </span>
-    <input ng-show="action==='update'||action==='delete'" type="text" ng-model="sucursalBancaria.idSucursal" ng-disabled="action==='update'"/><br/>
+    <span ng-show="action === 'update' || action === 'delete'" class="col-sm-4">Id Sucursal: </span>
+    <input ng-show="action === 'update' || action === 'delete'" type="text" ng-model="sucursalBancaria.idSucursal" ng-disabled="action === 'update'"/><br/>
     <span class="col-sm-4">Localizacion sucursal: </span>
     <input type="text" ng-model="sucursalBancaria.localizacion" /><br/>
     <span class="col-sm-4">Codigo Sucursal:  </span>
@@ -10,6 +10,10 @@
     <input type="text" ng-model="sucursalBancaria.entidadBancaria" /><br/>
     <span class="col-sm-4">Nombre Sucursal:  </span>
     <input type="text" ng-model="sucursalBancaria.nombreSucursal" /><br/>
-    <button ng-click="insertSucursal()" ng-show="action==='insert'">Insertar sucursal</button>
-    <button ng-click="updateSucursal()" ng-show="action==='update'">Actualizar sucursal</button>
+    <button ng-click="insertSucursal()" ng-show="action === 'insert'">Insertar sucursal</button>
+    <button ng-click="updateSucursal()" ng-show="action === 'update'">Actualizar sucursal</button>
+</div>
+    <div ng-show="mostrarErrores">
+    <h3>Se han producido los siguientes errores:</h3>   
+    <p ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
 </div>

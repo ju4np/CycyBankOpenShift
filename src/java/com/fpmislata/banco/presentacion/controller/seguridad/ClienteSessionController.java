@@ -1,10 +1,12 @@
 package com.fpmislata.banco.presentacion.controller.seguridad;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Cliente;
 import com.fpmislata.banco.dominio.seguridad.Credencial;
 import com.fpmislata.banco.dominio.seguridad.ClienteAuthentication;
 import com.fpmislata.banco.persistencia.ClienteDAO;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,19 +29,22 @@ public class ClienteSessionController {
 
     @RequestMapping(value = {"/session/cliente"}, method = RequestMethod.POST)
     public void login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
-        
-        Credencial credencial = (Credencial)jsonConvert.fromJson(jsonEntrada, Credencial.class);
-        
-        Cliente cliente = clienteAuthentication.Authenticate(credencial);
-        
-        if( cliente != null ){
-        
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            HttpSession httpSession = httpServletRequest.getSession(true);
-            httpSession.setAttribute("idCliente", cliente.getIdCliente());
-            
-        } else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        try {
+            Credencial credencial = (Credencial) jsonConvert.fromJson(jsonEntrada, Credencial.class);
+
+            Cliente cliente = clienteAuthentication.Authenticate(credencial);
+
+            if (cliente != null) {
+
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                HttpSession httpSession = httpServletRequest.getSession(true);
+                httpSession.setAttribute("idCliente", cliente.getIdCliente());
+
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
@@ -49,7 +54,7 @@ public class ClienteSessionController {
         HttpSession httpSession = httpServletRequest.getSession(true);
         httpSession.setAttribute("idCliente", null);
         httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        
+
     }
 
     @RequestMapping(value = {"/session/cliente"}, method = RequestMethod.GET)
@@ -57,16 +62,17 @@ public class ClienteSessionController {
 
         HttpSession httpSession = httpServletRequest.getSession(true);
         Integer idCliente = (Integer) httpSession.getAttribute("idCliente");
-        
-        
-        if(idCliente != null){
-            Cliente cliente = clienteDAO.get(idCliente);
-            
-            String jsonSalida = jsonConvert.toJson(cliente);
-            
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            httpServletResponse.getWriter().println(jsonSalida);
-            
+
+        if (idCliente != null) {
+            try {
+                Cliente cliente = clienteDAO.get(idCliente);
+
+                String jsonSalida = jsonConvert.toJson(cliente);
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.getWriter().println(jsonSalida);
+            } catch (BussinessException be) {
+                BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+            }
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
         }

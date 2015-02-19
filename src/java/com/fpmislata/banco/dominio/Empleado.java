@@ -1,11 +1,23 @@
 
 package com.fpmislata.banco.dominio;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Empleado {
     
     int idEmpleado;
+    
+    @NotBlank
+    @Size(min=6, max=40)
     String usuario, password, nombre;
+    
+    //@Pattern(regexp="\\d{9}\\D{1}")
+    @NotBlank
     String dni;
+    
+    @NotBlank
     String sucursal;
 
     public Empleado() {

@@ -17,6 +17,10 @@ public class BussinessException extends Exception {
     public BussinessException(BussinessMessage bussinessMessage){
         bussinessMessages.add(bussinessMessage);
     };
+    public BussinessException(org.hibernate.exception.ConstraintViolationException constraintViolationException){
+        BussinessMessage bussinessMessage = new BussinessMessage("Error SQL",constraintViolationException.getMessage());
+        bussinessMessages.add(bussinessMessage);
+    };
     
     public BussinessException(ConstraintViolationException constraintViolationException){
        for(ConstraintViolation constraintViolation: constraintViolationException.getConstraintViolations()){

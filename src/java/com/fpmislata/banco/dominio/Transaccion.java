@@ -1,10 +1,22 @@
+
+
 package com.fpmislata.banco.dominio;
+
+import javax.validation.constraints.Digits;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Transaccion {
     int cuentaOrigen;
+    
     int cuentaDestino;
+    
+    @Digits(integer=4, fraction=0)
     int pin;
+    
+    @Digits(integer=10, fraction=2)
     double cantidad;
+    
+    @NotBlank
     String concepto;
 
     public Transaccion(int cuentaOrigen, int cuentaDestino, int pin, double cantidad, String concepto) {

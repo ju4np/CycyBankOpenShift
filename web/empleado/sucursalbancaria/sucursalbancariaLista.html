@@ -30,3 +30,7 @@
            <br/>
           <a href="#/sucursalbancaria/insert" class="boton">Nueva sucursal bancaria</a>
         </div>
+    <div ng-show="mostrarErrores">
+    <h3>Se han producido los siguientes errores:</h3>   
+    <p ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
+</div>

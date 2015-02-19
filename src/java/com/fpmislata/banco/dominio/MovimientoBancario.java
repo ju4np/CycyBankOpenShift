@@ -1,16 +1,21 @@
 package com.fpmislata.banco.dominio;
 
 import com.fpmislata.banco.dominio.TipoMovimientoBancario;
-
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 public class MovimientoBancario {
 
     int idMovimientoBancario;
-
+    
+    @NotNull
     int CuentaOrigen;
-
+    
+    @NotNull
     int CuentaDestino;
-
+    
+    @NotNull
+    @Digits(integer=10, fraction=2)
     double cantidad;
 
     String motivo;
