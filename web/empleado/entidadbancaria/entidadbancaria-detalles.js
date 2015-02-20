@@ -18,8 +18,13 @@ app.controller("EntidadBancariaDetallesInsertController", ["$scope", "$http", "$
                 data: $scope.entidadBancaria
             }).success(function () {
                 window.location.assign("#/entidadbancaria/entidades");
-            }).error(function (status) {
-                alert("No se ha podido insertar la entidad bancaria");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se pudo insertar el entidad");
+                }
             });
         };
 
@@ -36,8 +41,13 @@ app.controller("EntidadBancariaDetallesUpdateController", ["$scope", "$http", "$
                 url: contextPath + "/api/EntidadBancaria/" + $routeParams.id
             }).success(function (data) {
                 $scope.entidadBancaria = data;
-            }).error(function (status) {
-                alert("Error: " + status);
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se pudo modificar la entidad");
+                }
             });
         };
 
@@ -51,8 +61,13 @@ app.controller("EntidadBancariaDetallesUpdateController", ["$scope", "$http", "$
                 data: $scope.entidadBancaria
             }).success(function () {
                 window.location.assign("#/entidadbancaria/entidades");
-            }).error(function () {
-                alert("No se ha podido modificar la entidad bancaria.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se ha podido modificar la entidad bancaria.");
+                }
             });
         };
 

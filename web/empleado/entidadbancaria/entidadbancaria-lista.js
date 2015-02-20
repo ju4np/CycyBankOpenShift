@@ -8,8 +8,14 @@ app.controller("EntidadBancariaListaController", ["$location","$scope", "$http",
                 url: contextPath + "/api/EntidadBancaria"
             }).success(function(data) {
                 $scope.entidadesBancarias = data;
-            }).error(function() {
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+
                  $location.url("/loginrequired");
+             }
             });
 
         };
@@ -35,8 +41,13 @@ app.controller("EntidadBancariaListaController", ["$location","$scope", "$http",
                     url: contextPath + "/api/EntidadBancaria/" + id
                 }).success(function() {
                     $scope.cargarEntidadesBancarias();
-                }).error(function() {
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
                     alert("Error: " + status);
+                }
                 });
 
             }

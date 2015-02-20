@@ -7,8 +7,13 @@ app.controller("CuentaDetailDeleteController", ["$scope", "$http", "$routeParams
                 url: contextPath + "/api/cuenta/" + $routeParams.id
             }).success(function(data) {
                 $scope.cuenta = data;
-            }).error(function() {
-                alert("No existe o no se pudo encontrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no de puede encontrar la cuenta");
+                }
             });
         };
         $scope.buscarCuenta();
@@ -20,8 +25,13 @@ app.controller("CuentaDetailDeleteController", ["$scope", "$http", "$routeParams
                 url: contextPath + "/api/cuenta/" + id
             }).success(function() {
                 window.location.assign("#/cuenta/cuentas");
-            }).error(function() {
-                alert("No existe o no se pudo borrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se puede borrar la cuenta");
+                }
             });
         };
     }]);
@@ -35,8 +45,13 @@ app.controller("CuentaDetailModificarController", ["$scope", "$http", "$routePar
                 url: contextPath + "/api/cuenta/" + $routeParams.id
             }).success(function(data) {
                 $scope.cuenta = data;
-            }).error(function() {
-                alert("No existe o no se pudo encontrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no de puede encontrar la cuenta");
+                }
             });
 
         };
@@ -49,8 +64,13 @@ app.controller("CuentaDetailModificarController", ["$scope", "$http", "$routePar
                 data: $scope.cuenta
             }).success(function() {
                 window.location.assign("#/cuenta/cuentas");
-            }).error(function() {
-                alert("No se pudo modificar o no existe.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se puede modificar la cuenta");
+                }
             });
         };
 
@@ -66,8 +86,13 @@ app.controller("CuentaDetailInsertarController", ["$scope", "$http", function($s
                 data: $scope.cuenta
             }).success(function() {
                 window.location.assign("#/cuenta/cuentas");
-            }).error(function() {
-                alert("No se pudo insertar la cuenta.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se puede insertar la cuenta");
+                }
             });
         };
     }]);

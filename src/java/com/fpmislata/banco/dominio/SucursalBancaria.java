@@ -1,21 +1,26 @@
 
 package com.fpmislata.banco.dominio;
 
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class SucursalBancaria {
     //Aributos 
     int idSucursal;
     
+    @NotNull
     @NotBlank
     String localizacion;
     
+    @NotNull
     @NotBlank
     String codigoSucursal;
     
+    @NotNull
     @NotBlank
     String entidadBancaria;
     
+    @NotNull
     @NotBlank
     String nombreSucursal;
     

@@ -16,3 +16,7 @@
     <button ng-show="action === 'insert'" id="insertar" ng-click="insertarCliente()">Insertar Cliente</button>
     <button ng-show="action === 'update'"id="modificar" ng-click="modificarCliente()">Modificar Cliente</button>
 </div>
+    <div ng-show="mostrarErrores">
+    <h3>Se han producido los siguientes errores:</h3>   
+    <p class="errorDatos" ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
+</div>

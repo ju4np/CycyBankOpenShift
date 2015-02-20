@@ -1,4 +1,11 @@
 app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
+        $scope.sucursalesBancarias = {
+            localizacion: "",
+            codigoSucursal: "",
+            entidadBancaria: "",
+            nombreSucursal: ""
+        };
+
         $scope.getSucursal = function () {
             $http({
                 method: "GET",
@@ -23,20 +30,26 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
                     url: contextPath + "/api/SucursalBancaria/" + id
                 }).success(function () {
                     window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-            }).error(function (data, status) {
-                if (status === 406) {
-                    $scope.errores = data;
-                    $scope.mostrarErrores = true;
-                } else {
-                    alert("No se pudo borrar la sucursal bancaria.");
-                }
-            });
+                }).error(function (data, status) {
+                    if (status === 406) {
+                        $scope.errores = data;
+                        $scope.mostrarErrores = true;
+                    } else {
+                        alert("No se pudo borrar la sucursal bancaria.");
+                    }
+                });
             }
         };
 
     }]);
 
  app.controller("SucursalbancariaDetalleInsertController", ["$scope", "$http", function ($scope, $http) {
+               $scope.sucursalBancaria = {
+            localizacion: "",
+            codigoSucursal: "",
+            entidadBancaria: "",
+            nombreSucursal: ""
+        };
         $scope.insertSucursal = function () {
             $http({
                 method: "POST",
@@ -57,6 +70,12 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
     }]);
 
  app.controller("SucursalbancariaDetalleUpdateController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
+               $scope.sucursalBancaria = {
+            localizacion: "",
+            codigoSucursal: "",
+            entidadBancaria: "",
+            nombreSucursal: ""
+        };
         $scope.getSucursal = function () {
             $http({
                 method: "GET",

@@ -1,4 +1,11 @@
  app.controller("SucursalbancariaListaController", ["$location", "$scope", "$http", function ($location, $scope, $http) {
+        $scope.sucursalesBancarias = {
+            localizacion: "",
+            codigoSucursal: "",
+            entidadBancaria: "",
+            nombreSucursal: ""
+        };
+     
         $scope.findAll = function () {
             $http({
                 method: "GET",

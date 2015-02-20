@@ -5,8 +5,13 @@ app.controller("CuentaMovimientoController", ["$location","$scope", "$http","$ro
                 url: contextPath + "/api/cuenta/"+ $routeParams.id
             }).success(function(data){
                 $scope.cuenta = data;
-            }).error(function(){
-                $location.url("loginrequired");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {               
+                    $location.url("loginrequired");
+                }
             });
         };
         $scope.cargarCuenta();
@@ -17,7 +22,13 @@ app.controller("CuentaMovimientoController", ["$location","$scope", "$http","$ro
                 url:contextPath+"/api/cuenta/"+$routeParams.id+"/movimientos"
             }).success(function(data){
                 $scope.movimientosBancarios = data;
-            }).error(function(status){
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no de puede encontrar el movimiento");
+                }
             });
         };
         
