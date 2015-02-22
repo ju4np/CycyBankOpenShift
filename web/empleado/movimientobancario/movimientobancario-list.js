@@ -5,8 +5,13 @@ app.controller("MovimientoBancarioListController", ["$location","$scope", "$http
                 url: contextPath + "/api/MovimientosBancarios/"
             }).success(function(data, status, headers, config) {
                 $scope.movimientosBancarios = data;
-            }).error(function(data, status, headers, config) {
-                 $location.url("/loginrequired");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    $location.url("/loginrequired");
+                }
             });
         };
         $scope.getMovimientos();

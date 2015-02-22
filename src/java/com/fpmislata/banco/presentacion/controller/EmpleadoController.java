@@ -1,8 +1,10 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.Empleado;
 import com.fpmislata.banco.persistencia.EmpleadoDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -36,29 +38,39 @@ public class EmpleadoController {
             }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
     @RequestMapping(value = {"/Empleado/{idEmpleado}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEmpleado") int idEmpleado) {
-        empleadoDAO.delete(idEmpleado);
-        httpServletResponse.setStatus(204);
-
+        try {
+            empleadoDAO.delete(idEmpleado);
+            httpServletResponse.setStatus(204);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
 
     @RequestMapping(value = {"/Empleado"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        empleadoDAO.insert((Empleado)jsonConvert.fromJson(jsonEntrada, Empleado.class));
-
+        try {
+            empleadoDAO.insert((Empleado) jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
 
     @RequestMapping(value = {"/Empleado"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-        empleadoDAO.update((Empleado)jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        try {
+            empleadoDAO.update((Empleado) jsonConvert.fromJson(jsonEntrada, Empleado.class));
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
 
-    
     @RequestMapping(value = {"/Empleado"})
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -68,6 +80,8 @@ public class EmpleadoController {
 
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 

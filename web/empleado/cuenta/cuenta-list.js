@@ -5,8 +5,13 @@ app.controller("CuentaListController", ["$location","$scope", "$http", function 
                 url: contextPath + "/api/cuentas"
             }).success(function(data) {
                 $scope.cuentas = data;
-            }).error(function() {
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
                 $location.url("/loginrequired");
+            }
             });
         };
         $scope.mostrarTablaCuenta();

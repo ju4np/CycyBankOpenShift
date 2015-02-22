@@ -7,8 +7,13 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
                 url: contextPath + "/api/Cliente/" + $routeParams.id
             }).success(function(data, status, headers, config) {
                 $scope.cliente = data; 
-            }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo encontrar." );
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se existe o no se puede encontrar el cliente");
+                }
             });
 
         };
@@ -20,8 +25,13 @@ app.controller("ClienteDetailDeleteController", ["$scope", "$http", "$routeParam
                 url: contextPath + "/api/Cliente/" +idCliente
             }).success(function(data, status, headers, config) {
                 window.location.assign("#/cliente/clientes");
-            }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo borrar.");
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se pudo borrar el cliente");
+                }
             });
         };
     }]);
@@ -42,8 +52,13 @@ app.controller("ClienteDetailModificarController", ["$scope", "$http", "$routePa
             }).success(function(data, status, headers, config) {
                 $scope.cliente = data;
                 $scope.cliente.fechaNacimiento=new Date($scope.cliente.fechaNacimiento);
-            }).error(function(data, status, headers, config) {
-                alert("No existe o no se pudo encontrar: " );
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no se puede encontrar el cliente");
+                }
             });
 
         };
@@ -56,8 +71,13 @@ app.controller("ClienteDetailModificarController", ["$scope", "$http", "$routePa
                 data: $scope.cliente
             }).success(function(data, status, headers, config) {     
                 window.location.assign("#/cliente/clientes");
-            }).error(function(data, status, headers, config) {
-                alert("no se pudo modificar o no existe");
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se puede modificar el cliente");
+                }
             });
         };
         
@@ -73,8 +93,13 @@ app.controller("ClienteDetailInsertController", ["$scope", "$http", function($sc
                 data: $scope.cliente
             }).success(function(data, status, headers, config) {
                 window.location.assign("#/cliente/clientes");
-            }).error(function(data, status, headers, config) {
-                alert("no se pudo insertar la entidad");
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No puede insertar el cliente");
+                }
             });
         };
         

@@ -1,9 +1,11 @@
-
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
+import com.fpmislata.banco.common.exceptions.BussinessMessage;
 import com.fpmislata.banco.dominio.Cliente;
 import com.fpmislata.banco.persistencia.ClienteDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 @Controller
 public class ClienteController {
@@ -40,7 +41,10 @@ public class ClienteController {
         } catch (IOException ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
+
     }
 
     @RequestMapping(value = {"/Cliente/{idCliente}"}, method = RequestMethod.DELETE)
@@ -51,6 +55,9 @@ public class ClienteController {
             clienteDao.delete(idCliente);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+            
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -58,6 +65,7 @@ public class ClienteController {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
             }
+
         }
     }
 
@@ -80,6 +88,8 @@ public class ClienteController {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
             }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
@@ -104,6 +114,8 @@ public class ClienteController {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
             }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
@@ -131,8 +143,9 @@ public class ClienteController {
                 ex.printStackTrace(httpServletResponse.getWriter());
             } catch (IOException ex1) {
             }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
 
     }
-
 }

@@ -1,6 +1,7 @@
 
 package com.fpmislata.banco.persistencia.impl.hibernate;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.MovimientoBancario;
 import com.fpmislata.banco.dominio.TipoMovimientoBancario;
 import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
@@ -14,7 +15,7 @@ import org.hibernate.Session;
 public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<MovimientoBancario, Integer> implements MovimientoBancarioDAO{
 
     @Override
-    public List<MovimientoBancario> getMovimientos(Integer idCuenta) {
+    public List<MovimientoBancario> getMovimientos(Integer idCuenta) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         try{
@@ -26,15 +27,47 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
             List<MovimientoBancario> lista = query.list();
             return lista;
             
-        }catch(Exception ex){
-            if(session.getTransaction().isActive()){
-                session.getTransaction().rollback();
+        } catch (javax.validation.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (org.hibernate.exception.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //    LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (RuntimeException ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw ex;
+        } catch (Exception ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //  LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
             }
             throw new RuntimeException(ex);
         }
     }
     
-    public MovimientoBancario insert(MovimientoBancario movimientoBancario){
+    @Override
+    public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             this.updateSaldo(movimientoBancario);
@@ -43,15 +76,46 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
             session.save(movimientoBancario);
             session.getTransaction().commit();
             return movimientoBancario;
-        }catch(Exception ex){
-            if(session.getTransaction().isActive()){
-                session.getTransaction().rollback();
+        } catch (javax.validation.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (org.hibernate.exception.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //    LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (RuntimeException ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw ex;
+        } catch (Exception ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //  LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
             }
             throw new RuntimeException(ex);
         }
     }
   
-    private void updateSaldo(MovimientoBancario movimientoBancario){
+    private void updateSaldo(MovimientoBancario movimientoBancario)throws BussinessException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             Query query;
@@ -70,9 +134,40 @@ public class MovimientoBancarioDAOImplHibernate extends GenericDAOImplHibernate<
             session.getTransaction().commit();
             
         
-        }catch(Exception ex){
-            if(session.getTransaction().isActive()){
-                session.getTransaction().rollback();
+        } catch (javax.validation.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (org.hibernate.exception.ConstraintViolationException cve) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //    LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw new BussinessException(cve);
+        } catch (RuntimeException ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //   LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
+            }
+            throw ex;
+        } catch (Exception ex) {
+            try {
+                if (session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+            } catch (Exception exc) {
+                //  LOGGER.log(Level.WARNING,"Falló al hacer un rollback", exc);
             }
             throw new RuntimeException(ex);
         }

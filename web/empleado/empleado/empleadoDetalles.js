@@ -15,8 +15,13 @@ app.controller("EmpleadoDetallesInsertController", ["$scope", "$http", "$routePa
                 data: $scope.empleado
             }).success(function () {
                 window.location.assign("#/empleado/empleados");
-            }).error(function () {
-                alert("No se ha podido insertar el empleado.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se pudo insertar el empleado");
+                }
             });
         };
 
@@ -34,8 +39,13 @@ app.controller("EmpleadoDetallesUpdateController", ["$scope", "$http", "$routePa
                 url: contextPath + "/api/Empleado/" + $routeParams.id
             }).success(function (data) {
                 $scope.empleado = data;
-            }).error(function (status) {
-                alert("Error: " + status);
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se encontro el cliente");
+                }
             });
         };
 
@@ -49,8 +59,13 @@ app.controller("EmpleadoDetallesUpdateController", ["$scope", "$http", "$routePa
                 data: $scope.empleado
             }).success(function () {
                 window.location.assign("#/empleado/empleados");
-            }).error(function () {
-                alert("No se pudo modificar el empleado.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se pudo modificar el cliente");
+                }
             });
         };
 

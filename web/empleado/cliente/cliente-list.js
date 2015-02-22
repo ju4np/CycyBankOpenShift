@@ -10,9 +10,13 @@ app.controller("ClienteListController", ["$location","$scope", "$http", function
                     $scope.clientes[i].fechaNacimiento=new Date($scope.clientes[i].fechaNacimiento);
                     $scope.clientes[i].contrasenya = "******";
                 }
-
-            }).error(function() {
-                $location.url("/loginrequired");
+}).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                     $location.url("/loginrequired");
+                }
             });
         };
         $scope.mostrarTablaCliente();

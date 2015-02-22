@@ -1,9 +1,11 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.MovimientoBancario;
 import com.fpmislata.banco.persistencia.MovimientoBancarioDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.TipoMovimientoBancario;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,12 +31,12 @@ public class MovimientoBancarioController {
 
         try {
 
-            MovimientoBancario movimientoBancario = (MovimientoBancario) movimientoBancarioDAO.get(idMovimientoBancario); 
+            MovimientoBancario movimientoBancario = (MovimientoBancario) movimientoBancarioDAO.get(idMovimientoBancario);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
             String json = jsonConvert.toJson(movimientoBancario);
-      
+
             httpServletResponse.getWriter().println(json);
 
         } catch (IOException ex) {
@@ -45,16 +47,21 @@ public class MovimientoBancarioController {
             } catch (IOException ex1) {
                 throw new RuntimeException(ex);
             }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
     @RequestMapping(value = {"/MovimientoBancario/{idMovimiento}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpRequest, HttpServletResponse httpServletResponse, @PathVariable("idMovimiento") int idMovimiento) {
 
-        try { 
+        try {
             movimientoBancarioDAO.delete(idMovimiento);
 
             httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -77,6 +84,8 @@ public class MovimientoBancarioController {
 
             String json = jsonConvert.toJson(movimientoBancario);
             httpServletResponse.getWriter().println(json);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
 
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
@@ -101,6 +110,8 @@ public class MovimientoBancarioController {
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             json = jsonConvert.toJson(movimientoBancario);
             httpServletResponse.getWriter().println(json);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
 
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");
@@ -120,22 +131,24 @@ public class MovimientoBancarioController {
             MovimientoBancario movimientoBancario = (MovimientoBancario) jsonConvert.fromJson(json, MovimientoBancario.class);
 
             MovimientoBancario movimientoBancarioUpdate = (MovimientoBancario) movimientoBancarioDAO.get(idMovimiento);
-            
+
             movimientoBancarioUpdate.setCantidad(movimientoBancario.getCantidad());
             movimientoBancarioUpdate.setCuentaDestino(movimientoBancario.getCuentaDestino());
             movimientoBancarioUpdate.setCuentaOrigen(movimientoBancario.getCuentaOrigen());
             movimientoBancarioUpdate.setMotivo(movimientoBancario.getMotivo());
-            
-            if(movimientoBancario.getTipoMovimientoBancario()== TipoMovimientoBancario.DEBE || movimientoBancario.getTipoMovimientoBancario()==TipoMovimientoBancario.HABER){
+
+            if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEBE || movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.HABER) {
                 movimientoBancarioUpdate.setTipoMovimientoBancario(movimientoBancario.getTipoMovimientoBancario());
             }
 
-            movimientoBancarioDAO.update(movimientoBancarioUpdate);  
+            movimientoBancarioDAO.update(movimientoBancarioUpdate);
 
             httpServletResponse.setContentType("application/json; charset=UTF-8");
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             json = jsonConvert.toJson(movimientoBancarioUpdate);
             httpServletResponse.getWriter().println(json);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
 
         } catch (Exception ex) {
             httpServletResponse.setContentType("text/plain; charset=UTF-8");

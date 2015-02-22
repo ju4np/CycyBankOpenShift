@@ -1,32 +1,48 @@
-app.controller("SucursalBancariaCuentaController", ["$location","$scope", "$http","$routeParams", function($location,$scope, $http, $routeParams) {
+app.controller("SucursalBancariaCuentaController", ["$location", "$scope", "$http", "$routeParams", function ($location, $scope, $http, $routeParams) {
+        $scope.sucursalesBancarias = {
+            localizacion: "",
+            codigoSucursal: "",
+            entidadBancaria: "",
+            nombreSucursal: ""
+        };
 
-        $scope.cargarSucursalBancaria = function() {
+        $scope.cargarSucursalBancaria = function () {
 
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria/" + $routeParams.id
-            }).success(function(data) {
+            }).success(function (data) {
                 $scope.sucursalBancaria = data;
-            }).error(function() {
-                 $location.url("/loginrequired");
+            }).error(function (data, status) {
+                if (status === 406) {
+                    $scope.errores = data;
+                    $scope.mostrarErrores = true;
+                } else {
+                    $location.url("/loginrequired");
+                }
             });
 
         };
 
 
-       $scope.cargarSucursalBancaria();
-       
-       $scope.cargarCuentasBancarias =function(){
+        $scope.cargarSucursalBancaria();
+
+        $scope.cargarCuentasBancarias = function () {
             $http({
                 method: "GET",
-                url: contextPath + "/api/SucursalBancaria/" + $routeParams.id+"/Cuentas"
-            }).success(function(data) {
+                url: contextPath + "/api/SucursalBancaria/" + $routeParams.id + "/Cuentas"
+            }).success(function (data) {
                 $scope.cuentas = data;
-            }).error(function() {
-                 $location.url("/loginrequired");
+            }).error(function (data, status) {
+                if (status === 406) {
+                    $scope.errores = data;
+                    $scope.mostrarErrores = true;
+                } else {
+                    $location.url("/loginrequired");
+                }
             });
-       };
-       
-       $scope.cargarCuentasBancarias();
-       
-       }]);
+        };
+
+        $scope.cargarCuentasBancarias();
+
+    }]);

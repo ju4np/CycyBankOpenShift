@@ -1,10 +1,17 @@
 package com.fpmislata.banco.dominio;
 
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 public class EntidadBancaria {
 
     private int idEntidadBancaria;
+    
+    @NotNull
     private String nombre;
+    
+    @NotBlank
     private String codigoEntidad;
     
     public EntidadBancaria(){

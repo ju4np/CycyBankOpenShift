@@ -1,9 +1,11 @@
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.EntidadBancaria;
 import com.fpmislata.banco.persistencia.EntidadBancariaDAO;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -39,34 +41,41 @@ public class EntidadBancariaController {
             }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
     @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
-        entidadBancariaDAO.delete(idEntidadBancaria);
-        httpServletResponse.setStatus(204);
-
+        try {
+            entidadBancariaDAO.delete(idEntidadBancaria);
+            httpServletResponse.setStatus(204);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
 
     @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        entidadBancariaDAO.insert((EntidadBancaria)jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
+        try {
+            entidadBancariaDAO.insert((EntidadBancaria) jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
 //        httpServletResponse.setStatus(204);
-
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
 
     @RequestMapping(value = {"/EntidadBancaria"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) {
-
-        entidadBancariaDAO.update((EntidadBancaria)jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
+        try {
+            entidadBancariaDAO.update((EntidadBancaria) jsonConvert.fromJson(jsonEntrada, EntidadBancaria.class));
 //        httpServletResponse.setStatus(204);
-
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
-    
 
-    
     @RequestMapping(value = {"/EntidadBancaria"})
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
@@ -76,18 +85,22 @@ public class EntidadBancariaController {
 
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
-    
+
     @RequestMapping(value = {"/EntidadBancaria/{idEntidadBancaria}/Sucursales"})
-    public void getSucursalesByIdEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@PathVariable("idEntidadBancaria") int idEntidadBancaria) {
+    public void getSucursalesByIdEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idEntidadBancaria") int idEntidadBancaria) {
         try {
 
             List sucursalesBancarias = sucursalBancariaDAO.getSucursales(idEntidadBancaria);
             httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalesBancarias));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
-    }
 
+    }
 }

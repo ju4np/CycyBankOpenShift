@@ -1,5 +1,6 @@
 package com.fpmislata.banco.persistencia.impl.jdbc;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.Cuenta;
 import com.fpmislata.banco.persistencia.CuentaDAO;
 import com.fpmislata.banco.persistencia.impl.jdbc.connection.ConnectionFactory;
@@ -140,6 +141,11 @@ public class CuentaDAOImplJDBC implements CuentaDAO {
 
     @Override
     public List<Cuenta> getCuentas(Integer idSucursalBancaria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Cuenta getCuentaByCuentaBancaria(Integer cuentaBancaria) throws BussinessException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

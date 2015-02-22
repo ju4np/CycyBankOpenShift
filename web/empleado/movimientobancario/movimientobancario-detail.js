@@ -7,8 +7,13 @@ app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "
                 url: contextPath + "/api/MovimientoBancario/" + $routeParams.id
             }).success(function(data) {
                 $scope.movimientoBancario = data;
-            }).error(function() {
-                alert("No existe o no se pudo encontrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no se puede encontrar");
+                }
             });
         };
         $scope.get();
@@ -19,8 +24,13 @@ app.controller("MovimientoBancarioDetailDeleteController", ["$scope", "$http", "
                 url: contextPath + "/api/MovimientoBancario/" + id
             }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function() {
-                alert("No existe o no se pudo borrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no se puede borrar");
+                }
             });
         };
     }]);
@@ -33,8 +43,13 @@ app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http"
                 url: contextPath + "/api/MovimientoBancario/" + $routeParams.id
             }).success(function(data) {
                 $scope.movimientoBancario = data;
-            }).error(function() {
-                alert("No existe o no se pudo encontrar.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no se puede encontrar");
+                }
             });
 
         };
@@ -56,8 +71,13 @@ app.controller("MovimientoBancarioDetailModificarController", ["$scope", "$http"
                 data: $scope.movimientoBancario
             }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function() {
-                alert("No se pudo modificar o no existe.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No existe o no se puede modificar");
+                }
             });
         };
 
@@ -74,8 +94,13 @@ app.controller("MovimientoBancarioDetailInsertarController", ["$scope", "$http",
                 data: $scope.movimientoBancario
             }).success(function() {
                 window.location.assign("#/movimientobancario/MovimientoBancarios");
-            }).error(function() {
-                alert("No se pudo insertar el movimiento.");
+            }).error(function (data,status) {
+                if (status === 406) {
+                    $scope.errores=data;
+                    $scope.mostrarErrores=true;
+                } else {
+                    alert("No se puede insertar el movimiento");
+                }
             });
         };
         $scope.tiposMovimientosBancarios = [

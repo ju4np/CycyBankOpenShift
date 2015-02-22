@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/cycybank">
-    <Resource
-        type="javax.sql.DataSource"
-        auth="Container"
-        name="jdbc/MySQLDS"
-        driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/cycybank"
-        username="root"
-        password="root"
- 
-        maxActive="10"
-        maxIdle="3"
-        maxWait="3000"
-        validationQuery="SELECT 1 FROM dual"
-    />
-    
+<Context antiJARLocking="true" path="/CycyBankOpenShift">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="10" maxIdle="3" maxWait="3000" name="jdbc/MySQLDS" password="root" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/cycybank" username="root" validationQuery="SELECT 1 FROM dual"/>
 </Context>

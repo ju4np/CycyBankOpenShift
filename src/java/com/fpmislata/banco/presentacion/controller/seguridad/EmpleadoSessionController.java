@@ -1,10 +1,12 @@
 package com.fpmislata.banco.presentacion.controller.seguridad;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.common.json.JsonConvert;
 import com.fpmislata.banco.dominio.Empleado;
 import com.fpmislata.banco.dominio.seguridad.Credencial;
 import com.fpmislata.banco.dominio.seguridad.EmpleadoAuthentication;
 import com.fpmislata.banco.persistencia.EmpleadoDAO;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,19 +29,23 @@ public class EmpleadoSessionController {
 
     @RequestMapping(value = {"/session/empleado"}, method = RequestMethod.POST)
     public void login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
-        
-        Credencial credencial = (Credencial)jsonConvert.fromJson(jsonEntrada, Credencial.class);
-        
-        Empleado empleado = empleadoAuthentication.Authenticate(credencial);
-        
-        if( empleado!= null ){
-        
-            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-            HttpSession httpSession = httpServletRequest.getSession(true);
-            httpSession.setAttribute("idEmpleado", empleado.getIdEmpleado());
-            
-        }else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+        Credencial credencial = (Credencial) jsonConvert.fromJson(jsonEntrada, Credencial.class);
+
+        try {
+            Empleado empleado = empleadoAuthentication.Authenticate(credencial);
+
+            if (empleado != null) {
+
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                HttpSession httpSession = httpServletRequest.getSession(true);
+                httpSession.setAttribute("idEmpleado", empleado.getIdEmpleado());
+
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 
@@ -49,7 +55,7 @@ public class EmpleadoSessionController {
         HttpSession httpSession = httpServletRequest.getSession(true);
         httpSession.setAttribute("idEmpleado", null);
         httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        
+
     }
 
     @RequestMapping(value = {"/session/empleado"}, method = RequestMethod.GET)
@@ -57,23 +63,26 @@ public class EmpleadoSessionController {
 
         HttpSession httpSession = httpServletRequest.getSession(true);
         Integer idEmpleado = (Integer) httpSession.getAttribute("idEmpleado");
-        
-        
-        if(idEmpleado != null){
-            Empleado empleado = empleadoDAO.get(idEmpleado);
-            if(empleado != null){
-                empleado.setPassword("*******");
-            
-                String jsonSalida = jsonConvert.toJson(empleado);
-            
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.getWriter().println(jsonSalida);
+
+        try {
+            if (idEmpleado != null) {
+                Empleado empleado = empleadoDAO.get(idEmpleado);
+                if (empleado != null) {
+                    empleado.setPassword("*******");
+
+                    String jsonSalida = jsonConvert.toJson(empleado);
+
+                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                    httpServletResponse.getWriter().println(jsonSalida);
+                } else {
+                    httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                }
+
             } else {
                 httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }
-            
-        } else {
-            httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
         }
     }
 }

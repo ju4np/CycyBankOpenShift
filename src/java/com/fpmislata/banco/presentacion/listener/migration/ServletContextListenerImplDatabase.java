@@ -13,9 +13,10 @@ public class ServletContextListenerImplDatabase implements ServletContextListene
 
     InitialContext initialContext;
     DataSource dataSource;
-
+ 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        System.out.println("*/*/*/*/*/*/*/*/*/ServletContextListener started ");
 //        try {
 //            //Ahora mismo esto no se usa            
 //            //Codigo para que funcione el autowired
@@ -41,7 +42,6 @@ public class ServletContextListenerImplDatabase implements ServletContextListene
 //            flyway.setEncoding("utf-8");
 //            flyway.migrate();
 //
-//            System.out.println("*/*/*/*/*/*/*/*/*/ServletContextListener started ");
 //        } catch (Exception ex) {
 //            throw new RuntimeException(ex);
 //        }

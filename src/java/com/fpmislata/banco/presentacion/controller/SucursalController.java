@@ -1,9 +1,10 @@
-
 package com.fpmislata.banco.presentacion.controller;
 
+import com.fpmislata.banco.common.exceptions.BussinessException;
 import com.fpmislata.banco.dominio.SucursalBancaria;
 import com.fpmislata.banco.persistencia.SucursalBancariaDAO;
 import com.fpmislata.banco.common.json.JsonConvert;
+import com.fpmislata.banco.presentacion.controller.commons.BussinessMessagesConvert;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class SucursalController {
-    
+
     //////////////////////////////////////////////////////////////////////////////////////   
     //              http://localhost:8084/banco/api/EntidadBancaria/3                   //
     //    Con esta ruta probamos que se muestra el hola mundo ya que al acceder a la    //
@@ -32,50 +33,66 @@ public class SucursalController {
     //  int idEntidadBancaria la sacamos de la url. Para ello lo que hay entre llaves   //
     //  en la url y lo que hay entre parentesis en @PathVariable debe ser igual.        //
     ////////////////////////////////////////////////////////////////////////////////////// 
-    
     @Autowired
     SucursalBancariaDAO sucursalDAO;
-    
+
     @Autowired
     JsonConvert jsonConvert;
-    
-    //Metodo get
-    @RequestMapping(value = {"/SucursalBancaria/{id}"},method = RequestMethod.GET)
-    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int idSucursal) throws IOException {
 
-        SucursalBancaria sucursalBancaria= sucursalDAO.get(idSucursal);
-        httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));
+    //Metodo get
+    @RequestMapping(value = {"/SucursalBancaria/{id}"}, method = RequestMethod.GET)
+    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int idSucursal) throws IOException {
+        try {
+            SucursalBancaria sucursalBancaria = sucursalDAO.get(idSucursal);
+            httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
-    
+
     //Metodo findAll
     @RequestMapping(value = {"/SucursalBancaria"})
     public void find(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
-        List sucursalBancaria = sucursalDAO.findAll();
+        try {
+            List sucursalBancaria = sucursalDAO.findAll();
 
-        httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));
+            httpServletResponse.getWriter().println(jsonConvert.toJson(sucursalBancaria));
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
-    
+
     //Metodo delete
-    @RequestMapping(value = {"/SucursalBancaria/{id}"},method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/SucursalBancaria/{id}"}, method = RequestMethod.DELETE)
     public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("id") int idSucursal) throws IOException {
-        sucursalDAO.delete(idSucursal);
-         httpServletResponse.setStatus(204);
+        try {
+            sucursalDAO.delete(idSucursal);
+            httpServletResponse.setStatus(204);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
-    
+
     //Metodo insert
-    @RequestMapping(value = {"/SucursalBancaria"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/SucursalBancaria"}, method = RequestMethod.POST)
     public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
-        
-        SucursalBancaria sucursalBancaria=(SucursalBancaria)jsonConvert.fromJson(jsonEntrada, SucursalBancaria.class);
-        sucursalDAO.insert(sucursalBancaria);
+        try {
+            SucursalBancaria sucursalBancaria = (SucursalBancaria) jsonConvert.fromJson(jsonEntrada, SucursalBancaria.class);
+            sucursalDAO.insert(sucursalBancaria);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
     }
-    
+
     //Metodo update
-    @RequestMapping(value = {"/SucursalBancaria"},method = RequestMethod.PUT)
+    @RequestMapping(value = {"/SucursalBancaria"}, method = RequestMethod.PUT)
     public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonEntrada) throws IOException {
-        
-        SucursalBancaria sucursalBancaria=(SucursalBancaria)jsonConvert.fromJson(jsonEntrada, SucursalBancaria.class);
-        sucursalDAO.update(sucursalBancaria);
-        
+        try {
+            SucursalBancaria sucursalBancaria = (SucursalBancaria) jsonConvert.fromJson(jsonEntrada, SucursalBancaria.class);
+            sucursalDAO.update(sucursalBancaria);
+        } catch (BussinessException be) {
+            BussinessMessagesConvert.toJson(be, httpServletResponse, jsonConvert);
+        }
+
     }
 }
