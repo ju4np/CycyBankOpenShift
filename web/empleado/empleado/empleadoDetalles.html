@@ -3,15 +3,15 @@
     <span ng-show="action==='update'||action==='delete'" class="col-sm-3">Id Empleado: </span>
     <input ng-show="action==='update'||action==='delete'" type="text" ng-model="empleado.idEmpleado" ng-disabled="editar"/><br/>
     <span class="col-sm-3">Usuario: </span>
-    <input type="text" ng-model="empleado.usuario" /><br/>
+    <input type="text" ng-model="empleado.usuario" ng-minlength="6" ng-maxlength="40"/><br/>
     <span class="col-sm-3">Contraseña:  </span>
-    <input type="text" ng-model="empleado.password" /><br/>
+    <input type="text" ng-model="empleado.password" ng-minlength="6" ng-maxlength="40"/><br/>
     <span class="col-sm-3">Nombre:  </span>
-    <input type="text" ng-model="empleado.nombre" /><br/>
+    <input type="text" ng-model="empleado.nombre" ng-minlength="6" ng-maxlength="40"/><br/>
     <span class="col-sm-3">DNI:  </span>
-    <input type="text" ng-model="empleado.dni" /><br/>
+    <input type="text" ng-model="empleado.dni"  ng-pattern="/^(\d{8})([-]?)([A-Z]{1})$/"  /><br/>
     <span class="col-sm-3">Sucursal:  </span>
-    <input type="text" ng-model="empleado.sucursal" /><br/>
+    <input type="text" ng-model="empleado.sucursal" required/><br/>
     <button ng-show="insertar" ng-click="insertarRegistro()">Insertar registro</button>
     <button ng-show="editar" ng-click="modificarRegistro()">Editar registro</button>
 </div>

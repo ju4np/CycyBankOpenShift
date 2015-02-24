@@ -1,9 +1,9 @@
 <div id="contenedor">
     <h2>Entidad Bancaria</h2>
     <span class="col-sm-3">Entidad: </span>
-    <input type="text" ng-model="entidadBancaria.nombre"/><br/>
+    <input type="text" ng-model="entidadBancaria.nombre" required/><br/>
     <span class="col-sm-3">Codigo:  </span>
-    <input type="text" ng-model="entidadBancaria.codigoEntidad"/><br/>
+    <input type="text" ng-model="entidadBancaria.codigoEntidad" required/><br/>
    
 <button ng-show="action==='insert'" ng-click="insertarRegistro()">Insertar registro</button>
 <button ng-show="action==='update'" ng-click="modificarRegistro()">Editar registro</button>

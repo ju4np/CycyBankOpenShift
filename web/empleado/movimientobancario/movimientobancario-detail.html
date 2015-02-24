@@ -3,13 +3,13 @@
     <span ng-show="action === 'update' || action === 'delete'" class="col-sm-4">Id movimiento: </span>
     <input ng-show="action === 'update' || action === 'delete'" ng-disabled="action === 'update' || action === 'delete'" type="text" ng-model="movimientoBancario.idMovimientoBancario"/></br>
     <span class="col-sm-4">Cuenta origen: </span>
-    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cuentaOrigen"/><br>
+    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cuentaOrigen" required/><br>
     <span class="col-sm-4">Cuenta destino: </span>
-    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cuentaDestino"/><br>
+    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cuentaDestino" required/><br>
     <span class="col-sm-4">Cantidad: </span>
-    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cantidad"/><br>
+    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.cantidad" required/><br>
     <span class="col-sm-4">Motivo: </span>
-    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.motivo"/><br>
+    <input ng-disabled="action === 'delete'" type="text" ng-model="movimientoBancario.motivo" required ng-minlength="15" /><br>
     <span class="col-sm-4">Tipo: </span>
     <select ng-disabled="action === 'delete'"  ng-model="movimientoBancario.tipoMovimientoBancario"   ng-options="tipoMovimientoBancario.id as tipoMovimientoBancario.titulo for tipoMovimientoBancario in tiposMovimientosBancarios">
         <option value="">--Elige opcion--</option>
