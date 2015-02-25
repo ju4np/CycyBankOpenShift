@@ -14,11 +14,16 @@ public class BussinessException extends Exception {
         bussinessMessages.add(bussinessMessage);
     }
     
+   public BussinessException(String message) {
+        BussinessMessage bussinessMessage = new BussinessMessage(null, message);
+        bussinessMessages.add(bussinessMessage);
+    }
+    
     public BussinessException(BussinessMessage bussinessMessage){
         bussinessMessages.add(bussinessMessage);
     };
     public BussinessException(org.hibernate.exception.ConstraintViolationException constraintViolationException){
-        BussinessMessage bussinessMessage = new BussinessMessage("Error SQL",constraintViolationException.getMessage());
+        BussinessMessage bussinessMessage = new BussinessMessage(null,constraintViolationException.getMessage());
         bussinessMessages.add(bussinessMessage);
     };
     
