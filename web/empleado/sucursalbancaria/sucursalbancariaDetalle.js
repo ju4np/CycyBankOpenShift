@@ -1,4 +1,4 @@
-app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
+app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
         $scope.sucursalesBancarias = {
             localizacion: "",
             codigoSucursal: "",
@@ -6,13 +6,13 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
             nombreSucursal: ""
         };
 
-        $scope.getSucursal = function () {
+        $scope.getSucursal = function() {
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria/" + $routeParams.id
-            }).success(function (data) {
+            }).success(function(data) {
                 $scope.sucursalBancaria = data;
-            }).error(function (data, status) {
+            }).error(function(data, status) {
                 if (status === 406) {
                     $scope.errores = data;
                     $scope.mostrarErrores = true;
@@ -23,14 +23,14 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
         };
         $scope.getSucursal();
 
-        $scope.deleteSucursal = function (id) {
+        $scope.deleteSucursal = function(id) {
             if (confirm("Desea borrar el registro con id: " + $routeParams.id)) {
                 $http({
                     method: "DELETE",
                     url: contextPath + "/api/SucursalBancaria/" + id
-                }).success(function () {
+                }).success(function() {
                     window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-                }).error(function (data, status) {
+                }).error(function(data, status) {
                     if (status === 406) {
                         $scope.errores = data;
                         $scope.mostrarErrores = true;
@@ -43,46 +43,49 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
 
     }]);
 
- app.controller("SucursalbancariaDetalleInsertController", ["$scope", "$http", function ($scope, $http) {
-               $scope.sucursalBancaria = {
+ app.controller("SucursalbancariaDetalleInsertController", ["$scope", "$http", function($scope, $http) {
+        $scope.sucursalBancaria = {
             localizacion: "",
             codigoSucursal: "",
             entidadBancaria: "",
             nombreSucursal: ""
         };
-        $scope.insertSucursal = function () {
-            $http({
-                method: "POST",
-                data: $scope.sucursalBancaria,
-                url: contextPath + "/api/SucursalBancaria/"
-            }).success(function () {
-                window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-            }).error(function (data, status) {
-                if (status === 406) {
-                    $scope.errores = data;
-                    $scope.mostrarErrores = true;
-                } else {
-                    alert("No se pudo insertar la sucursal bancaria.");
-                }
-            });
+
+        $scope.insertSucursal = function() {
+            if (contenedor.$valid) {
+                $http({
+                    method: "POST",
+                    data: $scope.sucursalBancaria,
+                    url: contextPath + "/api/SucursalBancaria/"
+                }).success(function() {
+                    window.location.assign("#/sucursalbancaria/sucursalesbancarias");
+                }).error(function(data, status) {
+                    if (status === 406) {
+                        $scope.errores = data;
+                        $scope.mostrarErrores = true;
+                    } else {
+                        alert("No se pudo insertar la sucursal bancaria.");
+                    }
+                });
+            }
         };
         $scope.action = "insert";
     }]);
 
- app.controller("SucursalbancariaDetalleUpdateController", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
-               $scope.sucursalBancaria = {
+ app.controller("SucursalbancariaDetalleUpdateController", ["$scope", "$http", "$routeParams", function($scope, $http, $routeParams) {
+        $scope.sucursalBancaria = {
             localizacion: "",
             codigoSucursal: "",
             entidadBancaria: "",
             nombreSucursal: ""
         };
-        $scope.getSucursal = function () {
+        $scope.getSucursal = function() {
             $http({
                 method: "GET",
                 url: contextPath + "/api/SucursalBancaria/" + $routeParams.id
-            }).success(function (data) {
+            }).success(function(data) {
                 $scope.sucursalBancaria = data;
-            }).error(function (data, status) {
+            }).error(function(data, status) {
                 if (status === 406) {
                     $scope.errores = data;
                     $scope.mostrarErrores = true;
@@ -95,21 +98,23 @@ app.controller("SucursalbancariaDetalleDeleteController", ["$scope", "$http", "$
 
         $scope.action = "update";
 
-        $scope.updateSucursal = function () {
-            $http({
-                method: "PUT",
-                data: $scope.sucursalBancaria,
-                url: contextPath + "/api/SucursalBancaria/"
-            }).success(function () {
-                window.location.assign("#/sucursalbancaria/sucursalesbancarias");
-            }).error(function (data, status) {
-                if (status === 406) {
-                    $scope.errores = data;
-                    $scope.mostrarErrores = true;
-                } else {
-                    alert("No se pudo modificar la sucursal bancaria.");
-                }
-            });
+        $scope.updateSucursal = function() {
+            if (contenedor.$valid) {
+                $http({
+                    method: "PUT",
+                    data: $scope.sucursalBancaria,
+                    url: contextPath + "/api/SucursalBancaria/"
+                }).success(function() {
+                    window.location.assign("#/sucursalbancaria/sucursalesbancarias");
+                }).error(function(data, status) {
+                    if (status === 406) {
+                        $scope.errores = data;
+                        $scope.mostrarErrores = true;
+                    } else {
+                        alert("No se pudo modificar la sucursal bancaria.");
+                    }
+                });
+            }
         };
     }]);
 

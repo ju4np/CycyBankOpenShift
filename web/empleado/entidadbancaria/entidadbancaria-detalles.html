@@ -1,14 +1,16 @@
-<div id="contenedor">
+<form id="contenedor" name="contenedor">
     <h2>Entidad Bancaria</h2>
     <span class="col-sm-3">Entidad: </span>
-    <input type="text" ng-model="entidadBancaria.nombre" required/><br/>
+    <input name="entidad" type="text" ng-model="entidadBancaria.nombre" required/><br/>
     <span class="col-sm-3">Codigo:  </span>
-    <input type="text" ng-model="entidadBancaria.codigoEntidad" required/><br/>
+    <input name="codigo" type="text" ng-model="entidadBancaria.codigoEntidad" required/><br/>
    
 <button ng-show="action==='insert'" ng-click="insertarRegistro()">Insertar registro</button>
 <button ng-show="action==='update'" ng-click="modificarRegistro()">Editar registro</button>
-</div>
+</form>
     <div ng-show="mostrarErrores">
     <h3>Se han producido los siguientes errores:</h3>   
     <p class="errorDatos" ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
 </div>
+<p ng-show="contenedor.entidad.$error.required">*El campo entidad es requerido.</p>
+<p ng-show="contenedor.codigo.$error.required">*El campo codigo es requerido.</p>

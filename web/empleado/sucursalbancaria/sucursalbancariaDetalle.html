@@ -1,19 +1,24 @@
-<div id="contenedor">
+<form id="contenedor" name="contenedor">
     <h2>Sucursal Bancaria</h2>
     <span ng-show="action === 'update' || action === 'delete'" class="col-sm-4">Id Sucursal: </span>
-    <input ng-show="action === 'update' || action === 'delete'" type="text" ng-model="sucursalBancaria.idSucursal" ng-disabled="action === 'update'"/><br/>
+    <input name="idSucursal" ng-show="action === 'update' || action === 'delete'" type="text" ng-model="sucursalBancaria.idSucursal" ng-disabled="action === 'update'"/><br/>
     <span class="col-sm-4">Localizacion sucursal: </span>
-    <input type="text" ng-model="sucursalBancaria.localizacion" required/><br/>
+    <input name="localizacion" type="text" ng-model="sucursalBancaria.localizacion" required/><br/>
     <span class="col-sm-4">Codigo Sucursal:  </span>
-    <input ng-model="sucursalBancaria.codigoSucursal" type="number" required/><br/>
+    <input name="codigoSucursal" ng-model="sucursalBancaria.codigoSucursal" type="text" required/><br/>
     <span class="col-sm-4">Entidad Bancaria:  </span>
-    <input type="text" ng-model="sucursalBancaria.entidadBancaria" required/><br/>
+    <input name="entidadBancaria" type="text" ng-model="sucursalBancaria.entidadBancaria" required/><br/>
     <span class="col-sm-4">Nombre Sucursal:  </span>
-    <input type="text" ng-model="sucursalBancaria.nombreSucursal" required/><br/>
+    <input name="nombreSucursal" type="text" ng-model="sucursalBancaria.nombreSucursal" required/><br/>
     <button ng-click="insertSucursal()" ng-show="action === 'insert'">Insertar sucursal</button>
     <button ng-click="updateSucursal()" ng-show="action === 'update'">Actualizar sucursal</button>
-</div>
+</form>
     <div ng-show="mostrarErrores">
     <h3>Se han producido los siguientes errores:</h3>   
     <p ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
 </div>
+<p ng-show="contenedor.idSucursal.$error.required">*El campo id Sucursal es requerido.</p>
+<p ng-show="contenedor.localizacion.$error.required">*El campo localizacion es requerido.</p>
+<p ng-show="contenedor.codigoSucursal.$error.required">*El campo codigo sucursal es incorrecto o está vacío.</p>
+<p ng-show="contenedor.entidadBancaria.$error.required">*El campo entidad bancaria es requerido.</p>
+<p ng-show="contenedor.nombreSucursal.$error.required">*El campo nombre Sucursal es requerido.</p>

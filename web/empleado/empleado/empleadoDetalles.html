@@ -1,21 +1,30 @@
-<div id="contenedor">
+<form id="contenedor" name="contenedor">
     <h2>Empleado</h2>
     <span ng-show="action==='update'||action==='delete'" class="col-sm-3">Id Empleado: </span>
-    <input ng-show="action==='update'||action==='delete'" type="text" ng-model="empleado.idEmpleado" ng-disabled="editar"/><br/>
+    <input name="idEmpleado" ng-show="action==='update'||action==='delete'" type="text" ng-model="empleado.idEmpleado" ng-disabled="editar"/><br/>
     <span class="col-sm-3">Usuario: </span>
-    <input type="text" ng-model="empleado.usuario" ng-minlength="6" ng-maxlength="40"/><br/>
+    <input name="usuario" type="text" ng-model="empleado.usuario" ng-minlength="6" ng-maxlength="40" required/><br/>
     <span class="col-sm-3">Contraseña:  </span>
-    <input type="text" ng-model="empleado.password" ng-minlength="6" ng-maxlength="40"/><br/>
+    <input name="password" type="text" ng-model="empleado.password" ng-pattern="/(?=^.{6,40}$)(?=.*\d*\d)(?=.*\W+)(?=.*[a-z]).*$/" required/><br/>
     <span class="col-sm-3">Nombre:  </span>
-    <input type="text" ng-model="empleado.nombre" ng-minlength="6" ng-maxlength="40"/><br/>
+    <input name="nombre" type="text" ng-model="empleado.nombre" ng-minlength="6" ng-maxlength="40" required/><br/>
     <span class="col-sm-3">DNI:  </span>
-    <input type="text" ng-model="empleado.dni"  ng-pattern="/^(\d{8})([-]?)([A-Z]{1})$/"  /><br/>
+    <input name="dni" type="text" ng-model="empleado.dni"  ng-pattern="/^(\d{8})([A-Z]{1})$/"  required/><br/>
     <span class="col-sm-3">Sucursal:  </span>
-    <input type="text" ng-model="empleado.sucursal" required/><br/>
+    <input name="sucursal" type="text" ng-model="empleado.sucursal" required/><br/>
     <button ng-show="insertar" ng-click="insertarRegistro()">Insertar registro</button>
     <button ng-show="editar" ng-click="modificarRegistro()">Editar registro</button>
-</div>
+</form>
     <div ng-show="mostrarErrores">
     <h3>Se han producido los siguientes errores:</h3>   
     <p class="errorDatos" ng-repeat="error in errores">{{error.fieldName}}: {{error.message}}</p>
 </div>
+<p ng-show="contenedor.usuario.$error.required">*El campo usuario es requerido.</p>
+<p ng-show="contenedor.usuario.$error.minlength||contenedor.usuario.$error.maxlength">*El campo usuario debe tener entre 6 y 40 carácteres.</p>
+<p ng-show="contenedor.password.$error.required">*El campo contraseña es requerido.</p>
+<p ng-show="contenedor.password.$error.minlength||contenedor.password.$error.pattern">*El campo contraseña debe contener al menos un caracter especial(@#$%...) un numero y una longitud entre 6 y 40 caracteres.</p>
+<p ng-show="contenedor.nombre.$error.required">*El campo nombre es requerido.</p>
+<p ng-show="contenedor.nombre.$error.minlength||contenedor.nombre.$error.maxlength">*El campo nombre debe tener entre 6 y 40 carácteres.</p>
+<p ng-show="contenedor.dni.$error.pattern">*El campo DNI debe seguir el formato 00000000X.</p>
+<p ng-show="contenedor.dni.$error.required">*El campo DNI es requerido.</p>
+<p ng-show="contenedor.sucursal.$error.required">*El campo surcursal es requerido.</p>
